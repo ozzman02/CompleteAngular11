@@ -14,7 +14,7 @@ namespace MvcTaskManager.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ProjectID { get; set; }
         public string ProjectName { get; set; }
-        [DisplayFormat(DataFormatString = "d/M/yyyy")]
+        [DisplayFormat(DataFormatString = "MM/dd/yyyy")]
         public DateTime DateOfStart { get; set; }
         public int TeamSize { get; set; }
     }
