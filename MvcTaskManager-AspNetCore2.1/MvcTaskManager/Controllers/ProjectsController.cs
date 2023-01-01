@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using MvcTaskManager.Models;
+using Project = MvcTaskManager.Models.Project;
 
 namespace MvcTaskManager.Controllers
 {
@@ -15,6 +17,26 @@ namespace MvcTaskManager.Controllers
         {
             TaskManagerDbContext db = new TaskManagerDbContext();
             List<Project> projects = db.Projects.ToList();
+            return projects;
+        }
+
+        [HttpGet]
+        [Route("api/projects/search/{searchby}/{searchtext}")]
+        public List<Project> Search(string searchBy, string searchText)
+        {
+            TaskManagerDbContext db = new TaskManagerDbContext();
+            List<Project> projects = null;
+            if (searchBy == "ProjectID" && searchText != "all")
+                projects = db.Projects.Where(temp => temp.ProjectID.ToString().Contains(searchText)).ToList();
+            else if (searchBy == "ProjectName" && searchText != "all")
+                projects = db.Projects.Where(temp => temp.ProjectName.Contains(searchText)).ToList();
+            else if (searchBy == "DateOfStart" && searchText != "all")
+                projects = db.Projects.Where(temp => temp.DateOfStart.ToString().Contains(searchText)).ToList();
+            else if (searchBy == "TeamSize" && searchText != "all")
+                projects = db.Projects.Where(temp => temp.TeamSize.ToString().Contains(searchText)).ToList();
+            else
+                projects = db.Projects.ToList();
+
             return projects;
         }
 
@@ -45,6 +67,24 @@ namespace MvcTaskManager.Controllers
             else
             {
                 return null;
+            }
+        }
+
+        [HttpDelete]
+        [Route("api/projects")]
+        public int Delete(int ProjectID)
+        {
+            TaskManagerDbContext db = new TaskManagerDbContext();
+            Project existingProject = db.Projects.Where(temp => temp.ProjectID == ProjectID).FirstOrDefault();
+            if (existingProject != null)
+            {
+                db.Projects.Remove(existingProject);
+                db.SaveChanges();
+                return ProjectID;
+            }
+            else
+            {
+                return -1;
             }
         }
     }

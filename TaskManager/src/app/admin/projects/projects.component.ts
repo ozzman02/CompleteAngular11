@@ -16,9 +16,11 @@ export class ProjectsComponent implements OnInit {
   editIndex: any = null;
   deleteProject: Project = new Project();
   deleteIndex: any = null;
-  pipe = new DatePipe('en-US'); // Use your own locale
-  
-  constructor(private projectsService: ProjectsService) {}
+  pipe = new DatePipe('en-US'); 
+  searchBy: string = 'ProjectName';
+  searchText: string = '';
+
+  constructor(private projectsService: ProjectsService) { }
 
   ngOnInit(): void {
     this.projectsService.getAllProjects().subscribe(
@@ -56,7 +58,7 @@ export class ProjectsComponent implements OnInit {
   onEditClick(event: any, index: number) {
     this.editProject.projectID = this.projects[index].projectID;
     this.editProject.projectName = this.projects[index].projectName;
-    this.editProject.dateOfStart  = this.pipe.transform(this.projects[index].dateOfStart, 'yyyy-MM-dd');
+    this.editProject.dateOfStart = this.pipe.transform(this.projects[index].dateOfStart, 'yyyy-MM-dd');
     this.editProject.teamSize = this.projects[index].teamSize;
     this.editIndex = index;
     console.log("Current project before saving: " + JSON.stringify(this.editProject));
@@ -64,8 +66,7 @@ export class ProjectsComponent implements OnInit {
 
   onUpdateClick() {
     this.projectsService.updateProject(this.editProject).subscribe(
-      (response: Project) =>
-      {
+      (response: Project) => {
         var p: Project = new Project();
         p.projectID = response.projectID;
         p.projectName = response.projectName;
@@ -78,11 +79,47 @@ export class ProjectsComponent implements OnInit {
         this.editProject.dateOfStart = null;
         this.editProject.teamSize = null;
       },
-      (error) =>
-      {
+      (error) => {
         console.log(error);
       }
     );
+  }
+
+  onDeleteClick(event: any, index: number) {
+    this.deleteIndex = index;
+    this.deleteProject.projectID = this.projects[index].projectID;
+    this.deleteProject.projectName = this.projects[index].projectName;
+    this.deleteProject.dateOfStart = this.projects[index].dateOfStart;
+    this.deleteProject.teamSize = this.projects[index].teamSize;
+  }
+
+  onDeleteConfirmClick() {
+    this.projectsService.deleteProject(this.deleteProject.projectID).subscribe(
+      (response) => {
+        this.projects.splice(this.deleteIndex, 1);
+        this.deleteProject.projectID = null;
+        this.deleteProject.projectName = null;
+        this.deleteProject.teamSize = null;
+        this.deleteProject.dateOfStart = null;
+      },
+      (error) => {
+        console.log(error);
+      });
+  }
+
+  onSearchClick() {
+    this.projectsService
+      .searchProjects(this.searchBy, this.searchText)
+      .subscribe(
+        (response: Project[]) =>
+        {
+          this.projects = response;
+        },
+        (error) =>
+        {
+          console.log(error);
+        }
+      );
   }
 
 }
