@@ -46,11 +46,11 @@
                     <td>{{ project.dateOfStart | date: 'MM/dd/yyyy' }}</td>
                     <td>{{ project.teamSize }}</td>
                     <td>
-                        <button class="btn btn-info" (click)="onEditClick($event, i)" data-toggle="modal"
+                        <button class="btn btn-info" (click)="onEditClick($event, i)" data-toggle="modal" 
                             data-target="#editModal">
                             Edit
-                        </button>
-                        <button class="btn btn-info" (click)="onDeleteClick($event, i)" data-toggle="modal"
+                        </button>&nbsp;
+                        <button class="btn btn-warning" (click)="onDeleteClick($event, i)" data-toggle="modal"
                             data-target="#deleteModal">
                             Delete
                         </button>
