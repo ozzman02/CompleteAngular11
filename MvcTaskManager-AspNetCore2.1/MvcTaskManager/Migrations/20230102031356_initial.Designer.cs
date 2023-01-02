@@ -10,7 +10,7 @@ using MvcTaskManager.Identity;
 namespace MvcTaskManager.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230102002829_initial")]
+    [Migration("20230102031356_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,7 +34,7 @@ namespace MvcTaskManager.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Role");
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -210,7 +210,7 @@ namespace MvcTaskManager.Migrations
 
                     b.HasKey("ProjectID");
 
-                    b.ToTable("Project");
+                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MvcTaskManager.Controllers
 {
+    /* Controller for serving home/index page at startup */
     public class HomeController : Controller
     {
         [Route("")]

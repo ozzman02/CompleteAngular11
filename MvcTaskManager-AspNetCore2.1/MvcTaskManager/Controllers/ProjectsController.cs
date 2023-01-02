@@ -11,6 +11,7 @@ using Project = MvcTaskManager.Models.Project;
 
 namespace MvcTaskManager.Controllers
 {
+    /* Controller for CRUD operations of Projects table */
     [Authorize]
     public class ProjectsController : Controller
     {
@@ -26,7 +27,7 @@ namespace MvcTaskManager.Controllers
         public List<Project> Get()
         {
             
-            List<Project> projects = db.Project.ToList();
+            List<Project> projects = db.Projects.ToList();
             return projects;
         }
 
@@ -37,15 +38,15 @@ namespace MvcTaskManager.Controllers
             
             List<Project> projects = null;
             if (searchBy == "ProjectID" && searchText != "all")
-                projects = db.Project.Where(temp => temp.ProjectID.ToString().Contains(searchText)).ToList();
+                projects = db.Projects.Where(temp => temp.ProjectID.ToString().Contains(searchText)).ToList();
             else if (searchBy == "ProjectName" && searchText != "all")
-                projects = db.Project.Where(temp => temp.ProjectName.Contains(searchText)).ToList();
+                projects = db.Projects.Where(temp => temp.ProjectName.Contains(searchText)).ToList();
             else if (searchBy == "DateOfStart" && searchText != "all")
-                projects = db.Project.Where(temp => temp.DateOfStart.ToString().Contains(searchText)).ToList();
+                projects = db.Projects.Where(temp => temp.DateOfStart.ToString().Contains(searchText)).ToList();
             else if (searchBy == "TeamSize" && searchText != "all")
-                projects = db.Project.Where(temp => temp.TeamSize.ToString().Contains(searchText)).ToList();
+                projects = db.Projects.Where(temp => temp.TeamSize.ToString().Contains(searchText)).ToList();
             else
-                projects = db.Project.ToList();
+                projects = db.Projects.ToList();
 
             return projects;
         }
@@ -55,7 +56,7 @@ namespace MvcTaskManager.Controllers
         public Project Post([FromBody] Project project)
         {
             
-            db.Project.Add(project);
+            db.Projects.Add(project);
             db.SaveChanges();
             return project;
         }
@@ -65,7 +66,7 @@ namespace MvcTaskManager.Controllers
         public Project Put([FromBody] Project project)
         {
             
-            Project existingProject = db.Project.Where(temp => temp.ProjectID == project.ProjectID).FirstOrDefault();
+            Project existingProject = db.Projects.Where(temp => temp.ProjectID == project.ProjectID).FirstOrDefault();
             if (existingProject != null)
             {
                 existingProject.ProjectName = project.ProjectName;
@@ -85,10 +86,10 @@ namespace MvcTaskManager.Controllers
         public int Delete(int ProjectID)
         {
             
-            Project existingProject = db.Project.Where(temp => temp.ProjectID == ProjectID).FirstOrDefault();
+            Project existingProject = db.Projects.Where(temp => temp.ProjectID == ProjectID).FirstOrDefault();
             if (existingProject != null)
             {
-                db.Project.Remove(existingProject);
+                db.Projects.Remove(existingProject);
                 db.SaveChanges();
                 return ProjectID;
             }

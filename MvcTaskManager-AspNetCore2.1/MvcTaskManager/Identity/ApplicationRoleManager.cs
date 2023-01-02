@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace MvcTaskManager.Identity
 {
+    /* Extends RoleManager class and provides methods for manipulating user roles information */
     public class ApplicationRoleManager : RoleManager<ApplicationRole>
     {
         public ApplicationRoleManager(

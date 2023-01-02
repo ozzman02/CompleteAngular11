@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace MvcTaskManager.Services
 {
+    /* Service for user authentication */
     public class UsersService : IUsersService
     {
         private readonly AppSettings _appSettings;

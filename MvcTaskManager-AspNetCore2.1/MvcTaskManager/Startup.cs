@@ -17,6 +17,7 @@ using MvcTaskManager.Services;
 
 namespace MvcTaskManager
 {
+    /* Contains ConfiguredServices and Configured methods to add necessary services to the application */
     public class Startup
     {
         public IConfiguration Configuration { get; set; }

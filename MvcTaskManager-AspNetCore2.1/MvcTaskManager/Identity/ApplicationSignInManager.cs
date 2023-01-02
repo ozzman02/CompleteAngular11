@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace MvcTaskManager.Identity
 {
+    /* Extends SignInManager class and provides methods for user login */
     public class ApplicationSignInManager : SignInManager<ApplicationUser>
     {
         public ApplicationSignInManager(

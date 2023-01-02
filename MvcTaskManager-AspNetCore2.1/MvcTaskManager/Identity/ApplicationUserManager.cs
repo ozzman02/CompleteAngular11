@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace MvcTaskManager.Identity
 {
+    /* Extends UserManager class and provides methods for manipulating users information */
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
         public ApplicationUserManager(
