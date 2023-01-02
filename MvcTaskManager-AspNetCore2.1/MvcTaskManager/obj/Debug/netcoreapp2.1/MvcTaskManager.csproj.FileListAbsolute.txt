@@ -1,3 +1,4 @@
+/Users/ovenegas/git/personal/CompleteAngular11/MvcTaskManager-AspNetCore2.1/MvcTaskManager/bin/Debug/netcoreapp2.1/appsettings.json
 /Users/ovenegas/git/personal/CompleteAngular11/MvcTaskManager-AspNetCore2.1/MvcTaskManager/bin/Debug/netcoreapp2.1/MvcTaskManager.deps.json
 /Users/ovenegas/git/personal/CompleteAngular11/MvcTaskManager-AspNetCore2.1/MvcTaskManager/bin/Debug/netcoreapp2.1/MvcTaskManager.runtimeconfig.json
 /Users/ovenegas/git/personal/CompleteAngular11/MvcTaskManager-AspNetCore2.1/MvcTaskManager/bin/Debug/netcoreapp2.1/MvcTaskManager.runtimeconfig.dev.json

@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MvcTaskManager.Models
 {
+    /* Model class for Projects Table */
     public class Project
     {
         [Key]
@@ -19,16 +20,6 @@ namespace MvcTaskManager.Models
         public int TeamSize { get; set; }
     }
 
-    public class TaskManagerDbContext : DbContext
-    {
-        public DbSet<Project> Projects { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer("data source=localhost; integrated security=false; user id=sa; password=RootPassw0rd!2023; initial catalog=TaskManager");
-        }
-    }
 }
 
 
