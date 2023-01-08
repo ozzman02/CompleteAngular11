@@ -1,36 +1,45 @@
 ﻿<Properties StartupConfiguration="{AEF4B8C4-9596-444D-BCDB-5A52E9CB2434}|Default">
   <MonoDevelop.Ide.ItemProperties.MvcTaskManager PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MvcTaskManager/wwwroot/index.html">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/ovenegas/git/personal/CompleteAngular11/MvcTaskManager-AspNetCore2.1/MvcTaskManager/Controllers/AccountController.cs" relfile="MvcTaskManager/Controllers/AccountController.cs" line="26" column="13" />
+      <Breakpoint file="/Users/ovenegas/git/personal/CompleteAngular11/MvcTaskManager-AspNetCore2.1/MvcTaskManager/Services/UsersService.cs" relfile="MvcTaskManager/Services/UsersService.cs" line="28" column="13" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="MvcTaskManager/Startup.cs">
     <Files>
-      <File FileName="MvcTaskManager/Startup.cs" />
-      <File FileName="MvcTaskManager/Models/Project.cs" Line="24" Column="53" />
-      <File FileName="MvcTaskManager/Controllers/ProjectsController.cs" Line="14" Column="35" />
-      <File FileName="MvcTaskManager/Controllers/HomeController.cs" />
-      <File FileName="MvcTaskManager/wwwroot/index.html" Line="12" Column="49" />
-      <File FileName="MvcTaskManager/Views/Home/Index.cshtml" Line="12" Column="139" />
+      <File FileName="MvcTaskManager/Startup.cs" Line="104" Column="50" />
+      <File FileName="MvcTaskManager/Controllers/AccountController.cs" Line="26" Column="1" />
+      <File FileName="MvcTaskManager/ServiceContracts/IUsersService.cs" Line="12" Column="6" />
+      <File FileName="MvcTaskManager/Services/UsersService.cs" Line="28" Column="1" />
+      <File FileName="MvcTaskManager/Program.cs" Line="17" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="MvcTaskManager" expanded="True">
             <Node name="MvcTaskManager" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Identity" expanded="True" />
+              <Node name="Models" expanded="True" />
               <Node name="Properties" expanded="True" />
+              <Node name="ServiceContracts" expanded="True" />
+              <Node name="Services" expanded="True" />
+              <Node name="ViewModels" expanded="True" />
               <Node name="Views" expanded="True">
-                <Node name="Home" expanded="True">
-                  <Node name="Index.cshtml" selected="True" />
-                </Node>
+                <Node name="Home" expanded="True" />
               </Node>
               <Node name="wwwroot" expanded="True" />
             </Node>
           </Node>
         </State>
       </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>

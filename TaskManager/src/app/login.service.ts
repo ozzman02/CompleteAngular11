@@ -16,13 +16,15 @@ export class LoginService {
     return this.httpClient.post<any>("/authenticate", loginViewModel, { responseType: "json" })
       .pipe(map(user => {
         if (user) {
-          this.currentUserName = user.UserName;
+          this.currentUserName = user.userName;
+          sessionStorage['currentUser'] = JSON.stringify(user);
         }
         return user;
       }));
   }
 
   public Logout() {
+    sessionStorage.removeItem("currentUser");
     this.currentUserName = null;
   }
 

@@ -734,6 +734,9 @@ class ProjectsComponent {
   ngOnInit() {
     this.projectsService.getAllProjects().subscribe(response => {
       this.projects = response;
+    }, error => {
+      console.log(error);
+      alert("Authentication failed");
     });
   }
   /*
@@ -1126,27 +1129,27 @@ __webpack_require__.r(__webpack_exports__);
 function AppComponent_li_7_Template(rf, ctx) {
   if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "li", 7)(1, "a", 17);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2, "Dashboard");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
   }
+  if (rf & 2) {
+    const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"]("User: ", ctx_r0.loginService.currentUserName, "");
+  }
 }
-function AppComponent_li_11_Template(rf, ctx) {
+function AppComponent_li_8_Template(rf, ctx) {
   if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "li", 7)(1, "a", 18);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2, "Projects");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2, "Dashboard");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
   }
 }
 function AppComponent_li_12_Template(rf, ctx) {
   if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "li", 7)(1, "a", 19);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2, "Projects");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-  }
-  if (rf & 2) {
-    const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](ctx_r2.loginService.currentUserName);
   }
 }
 function AppComponent_li_13_Template(rf, ctx) {
@@ -1185,7 +1188,7 @@ AppComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵ
   selectors: [["app-root"]],
   decls: 25,
   vars: 5,
-  consts: [[1, "navbar", "navbar-expand-sm", "bg-success", "navbar-dark"], ["href", "#", 1, "navbar-brand"], ["type", "button", "data-toggle", "collapse", "data-target", "#mynav", 1, "navbar-toggler"], [1, "navbar-toggler-icon"], ["id", "mynav", 1, "collapse", "navbar-collapse"], [1, "navbar-nav", "mr-auto"], ["class", "nav-item", 4, "ngIf"], [1, "nav-item"], ["routerLink", "about", 1, "nav-link"], [1, "form-inline", "my-2", "my-lg-0"], [1, "input-group"], [1, "input-group-prepend"], ["id", "search", 1, "input-group-text"], [1, "fa", "fa-search"], ["type", "text", "placeholder", "Search", 1, "form-control"], ["type", "button", 1, "btn", "btn-warning", "my2-", "my-sm-0", 3, "click"], [1, "container-fluid"], ["routerLink", "dashboard", 1, "nav-link"], ["routerLink", "projects", 1, "nav-link"], ["href", "#", 1, "nav-link"], ["href", "#", 1, "nav-link", 3, "click"], ["routerLink", "login", 1, "nav-link"]],
+  consts: [[1, "navbar", "navbar-expand-sm", "bg-success", "navbar-dark"], ["href", "#", 1, "navbar-brand"], ["type", "button", "data-toggle", "collapse", "data-target", "#mynav", 1, "navbar-toggler"], [1, "navbar-toggler-icon"], ["id", "mynav", 1, "collapse", "navbar-collapse"], [1, "navbar-nav", "mr-auto"], ["class", "nav-item", 4, "ngIf"], [1, "nav-item"], ["routerLink", "about", 1, "nav-link"], [1, "form-inline", "my-2", "my-lg-0"], [1, "input-group"], [1, "input-group-prepend"], ["id", "search", 1, "input-group-text"], [1, "fa", "fa-search"], ["type", "text", "placeholder", "Search", 1, "form-control"], ["type", "button", 1, "btn", "btn-warning", "my2-", "my-sm-0", 3, "click"], [1, "container-fluid"], ["href", "#", 1, "nav-link"], ["routerLink", "dashboard", 1, "nav-link"], ["routerLink", "projects", 1, "nav-link"], ["href", "#", 1, "nav-link", 3, "click"], ["routerLink", "login", 1, "nav-link"]],
   template: function AppComponent_Template(rf, ctx) {
     if (rf & 1) {
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "nav", 0)(1, "a", 1);
@@ -1195,12 +1198,12 @@ AppComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵ
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](4, "span", 3);
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](5, "div", 4)(6, "ul", 5);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](7, AppComponent_li_7_Template, 3, 0, "li", 6);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](8, "li", 7)(9, "a", 8);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](10, "About");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](7, AppComponent_li_7_Template, 3, 1, "li", 6);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](8, AppComponent_li_8_Template, 3, 0, "li", 6);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](9, "li", 7)(10, "a", 8);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](11, "About");
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](11, AppComponent_li_11_Template, 3, 0, "li", 6);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](12, AppComponent_li_12_Template, 3, 1, "li", 6);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](12, AppComponent_li_12_Template, 3, 0, "li", 6);
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](13, AppComponent_li_13_Template, 3, 0, "li", 6);
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](14, AppComponent_li_14_Template, 3, 0, "li", 6);
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
@@ -1222,9 +1225,9 @@ AppComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵ
     if (rf & 2) {
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](7);
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx.loginService.currentUserName != null);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx.loginService.currentUserName != null);
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx.loginService.currentUserName != null);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx.loginService.currentUserName != null);
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx.loginService.currentUserName != null);
@@ -1373,12 +1376,14 @@ class LoginService {
       responseType: "json"
     }).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_0__.map)(user => {
       if (user) {
-        this.currentUserName = user.UserName;
+        this.currentUserName = user.userName;
+        sessionStorage['currentUser'] = JSON.stringify(user);
       }
       return user;
     }));
   }
   Logout() {
+    sessionStorage.removeItem("currentUser");
     this.currentUserName = null;
   }
 }
@@ -1516,9 +1521,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ProjectsService": () => (/* binding */ ProjectsService)
 /* harmony export */ });
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ 635);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ 8987);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common/http */ 8987);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ 635);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2560);
+
 
 
 
@@ -1529,9 +1535,18 @@ class ProjectsService {
   }
   /* The Map is an RXJS operator which executes a function after receiving response from the server */
   getAllProjects() {
+    var currentUser = {
+      token: ""
+    };
+    var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__.HttpHeaders();
+    if (sessionStorage['currentUser'] != null) {
+      currentUser = JSON.parse(sessionStorage['currentUser']);
+      headers = headers.set("Authorization", "Bearer " + currentUser.token);
+    }
     return this.httpClient.get(this.urlPrefix + "/api/projects", {
+      headers: headers,
       responseType: "json"
-    }).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_0__.map)(data => {
+    }).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_1__.map)(data => {
       for (let i = 0; i < data.length; i++) {
         data[i].teamSize = data[i].teamSize * 100;
       }
@@ -1539,29 +1554,66 @@ class ProjectsService {
     }));
   }
   insertProject(newProject) {
+    var currentUser = {
+      token: ""
+    };
+    var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__.HttpHeaders();
+    if (sessionStorage['currentUser'] != null) {
+      currentUser = JSON.parse(sessionStorage['currentUser']);
+      headers = headers.set("Authorization", "Bearer " + currentUser.token);
+    }
     return this.httpClient.post(this.urlPrefix + "/api/projects", newProject, {
+      headers: headers,
       responseType: "json"
     });
   }
   updateProject(existingProject) {
+    var currentUser = {
+      token: ""
+    };
+    var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__.HttpHeaders();
+    if (sessionStorage['currentUser'] != null) {
+      currentUser = JSON.parse(sessionStorage['currentUser']);
+      headers = headers.set("Authorization", "Bearer " + currentUser.token);
+    }
     return this.httpClient.put(this.urlPrefix + "/api/projects", existingProject, {
+      headers: headers,
       responseType: "json"
     });
   }
   deleteProject(projectId) {
-    return this.httpClient.delete(this.urlPrefix + "/api/projects?ProjectID=" + projectId);
+    var currentUser = {
+      token: ""
+    };
+    var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__.HttpHeaders();
+    if (sessionStorage['currentUser'] != null) {
+      currentUser = JSON.parse(sessionStorage['currentUser']);
+      headers = headers.set("Authorization", "Bearer " + currentUser.token);
+    }
+    return this.httpClient.delete(this.urlPrefix + "/api/projects?ProjectID=" + projectId, {
+      headers: headers
+    });
   }
   searchProjects(searchBy, searchText) {
+    var currentUser = {
+      token: ""
+    };
+    var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__.HttpHeaders();
+    if (sessionStorage['currentUser'] != null) {
+      currentUser = JSON.parse(sessionStorage['currentUser']);
+      headers = headers.set("Authorization", "Bearer " + currentUser.token);
+    }
     var newSearchText = searchText === '' ? 'all' : searchText;
     return this.httpClient.get(this.urlPrefix + '/api/projects/search/' + searchBy + '/' + newSearchText, {
+      headers: headers,
       responseType: 'json'
     });
   }
 }
 ProjectsService.ɵfac = function ProjectsService_Factory(t) {
-  return new (t || ProjectsService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient));
+  return new (t || ProjectsService)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_0__.HttpClient));
 };
-ProjectsService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({
+ProjectsService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjectable"]({
   token: ProjectsService,
   factory: ProjectsService.ɵfac,
   providedIn: 'root'
