@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpBackend, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { LoginViewModel } from './login-view-model';
@@ -8,11 +8,16 @@ import { LoginViewModel } from './login-view-model';
 })
 export class LoginService {
 
+  private httpClient: HttpClient | null = null;
+
   currentUserName: any = null;
 
-  constructor(private httpClient: HttpClient) { }
+  /* HttpBacked represents the client without interceptors */
+  constructor(private httpBackend: HttpBackend) { }
 
+  /* We don't want the interceptor to be executed for the login */
   public Login(loginViewModel: LoginViewModel): Observable<any> {
+    this.httpClient = new HttpClient(this.httpBackend);
     return this.httpClient.post<any>("/authenticate", loginViewModel, { responseType: "json" })
       .pipe(map(user => {
         if (user) {
