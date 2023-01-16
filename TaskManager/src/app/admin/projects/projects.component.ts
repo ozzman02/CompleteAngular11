@@ -16,27 +16,23 @@ export class ProjectsComponent implements OnInit {
   editIndex: any = null;
   deleteProject: Project = new Project();
   deleteIndex: any = null;
-  pipe = new DatePipe('en-US'); 
+  pipe = new DatePipe('en-US');
   searchBy: string = 'ProjectName';
   searchText: string = '';
 
   constructor(private projectsService: ProjectsService) { }
 
   ngOnInit(): void {
+    /* We are removing the error code handling since we have an unauthorized interceptor */
     this.projectsService.getAllProjects().subscribe(
       (response: Project[]) => {
         this.projects = response;
-      },
-      (error) => {
-        console.log(error);
-        alert("Authentication failed");
-
       }
     );
   }
 
-  /* 
-    this.projectsService.insertProject(this.newProject).subscribe(()=>{}, ()=>{}); 
+  /*
+    this.projectsService.insertProject(this.newProject).subscribe(()=>{}, ()=>{});
     first function  () => {} is handleData
     second function () => {} is handleError
   */

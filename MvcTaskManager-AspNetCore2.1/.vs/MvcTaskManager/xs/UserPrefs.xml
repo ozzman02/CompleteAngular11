@@ -1,19 +1,15 @@
 ﻿<Properties StartupConfiguration="{AEF4B8C4-9596-444D-BCDB-5A52E9CB2434}|Default">
-  <MonoDevelop.Ide.ItemProperties.MvcTaskManager PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/ovenegas/git/personal/CompleteAngular11/MvcTaskManager-AspNetCore2.1/MvcTaskManager/Controllers/AccountController.cs" relfile="MvcTaskManager/Controllers/AccountController.cs" line="26" column="13" />
-      <Breakpoint file="/Users/ovenegas/git/personal/CompleteAngular11/MvcTaskManager-AspNetCore2.1/MvcTaskManager/Services/UsersService.cs" relfile="MvcTaskManager/Services/UsersService.cs" line="28" column="13" />
-    </BreakpointStore>
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="MvcTaskManager/Startup.cs">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MvcTaskManager/Controllers/ProjectsController.cs">
     <Files>
-      <File FileName="MvcTaskManager/Startup.cs" Line="104" Column="50" />
-      <File FileName="MvcTaskManager/Controllers/AccountController.cs" Line="26" Column="1" />
-      <File FileName="MvcTaskManager/ServiceContracts/IUsersService.cs" Line="12" Column="6" />
-      <File FileName="MvcTaskManager/Services/UsersService.cs" Line="28" Column="1" />
-      <File FileName="MvcTaskManager/Program.cs" Line="17" Column="1" />
+      <File FileName="MvcTaskManager/appsettings.json" Line="1" Column="1" />
+      <File FileName="MvcTaskManager/AppSettings.cs" Line="10" Column="23" />
+      <File FileName="MvcTaskManager/Startup.cs" Line="58" Column="63" />
+      <File FileName="MvcTaskManager/Services/UsersService.cs" Line="50" Column="17" />
+      <File FileName="MvcTaskManager/Identity/ApplicationUser.cs" Line="11" Column="23" />
+      <File FileName="MvcTaskManager/Controllers/AccountController.cs" Line="29" Column="29" />
+      <File FileName="MvcTaskManager/Controllers/ProjectsController.cs" Line="71" Column="14" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -35,11 +31,11 @@
           </Node>
         </State>
       </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
-      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.MvcTaskManager PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>

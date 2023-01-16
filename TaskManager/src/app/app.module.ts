@@ -7,6 +7,7 @@ import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { JwtInterceptorService } from './jwt-interceptor.service';
+import { JwtUnauthorizedInterceptorService } from './jwt-unauthorized-interceptor.service';
 import { LoginComponent } from './login/login.component';
 
 
@@ -23,9 +24,14 @@ import { LoginComponent } from './login/login.component';
     FormsModule
   ],
   providers: [
-    { 
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtUnauthorizedInterceptorService,
       multi: true
     }
   ],
