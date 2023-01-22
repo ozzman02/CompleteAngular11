@@ -7,9 +7,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,11 +15,13 @@
     <None Remove="ViewModels\" />
     <None Remove="ServiceContracts\" />
     <None Remove="Services\" />
+    <None Remove="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Identity\" />
     <Folder Include="ViewModels\" />
     <Folder Include="ServiceContracts\" />
     <Folder Include="Services\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 </Project>

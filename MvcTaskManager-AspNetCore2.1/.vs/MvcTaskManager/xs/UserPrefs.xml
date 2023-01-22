@@ -1,15 +1,14 @@
 ﻿<Properties StartupConfiguration="{AEF4B8C4-9596-444D-BCDB-5A52E9CB2434}|Default">
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MvcTaskManager/Controllers/ProjectsController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MvcTaskManager/Startup.cs">
     <Files>
-      <File FileName="MvcTaskManager/appsettings.json" Line="1" Column="1" />
-      <File FileName="MvcTaskManager/AppSettings.cs" Line="10" Column="23" />
-      <File FileName="MvcTaskManager/Startup.cs" Line="58" Column="63" />
-      <File FileName="MvcTaskManager/Services/UsersService.cs" Line="50" Column="17" />
-      <File FileName="MvcTaskManager/Identity/ApplicationUser.cs" Line="11" Column="23" />
-      <File FileName="MvcTaskManager/Controllers/AccountController.cs" Line="29" Column="29" />
-      <File FileName="MvcTaskManager/Controllers/ProjectsController.cs" Line="71" Column="14" />
+      <File FileName="MvcTaskManager/appsettings.json" />
+      <File FileName="MvcTaskManager/AppSettings.cs" />
+      <File FileName="MvcTaskManager/Startup.cs" Line="45" Column="58" />
+      <File FileName="MvcTaskManager/Services/UsersService.cs" />
+      <File FileName="MvcTaskManager/Identity/ApplicationUser.cs" />
+      <File FileName="MvcTaskManager/Controllers/AccountController.cs" />
+      <File FileName="MvcTaskManager/Controllers/ProjectsController.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -33,9 +32,10 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.MvcTaskManager PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.MvcTaskManager PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

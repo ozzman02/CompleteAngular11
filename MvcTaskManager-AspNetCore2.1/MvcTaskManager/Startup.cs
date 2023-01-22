@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -10,14 +9,15 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
 using MvcTaskManager.Identity;
 using MvcTaskManager.ServiceContracts;
 using MvcTaskManager.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace MvcTaskManager
 {
-    /* Contains ConfiguredServices and Configured methods to add necessary services to the application */
     public class Startup
     {
         public IConfiguration Configuration { get; set; }
@@ -107,6 +107,10 @@ namespace MvcTaskManager
                     {
                         await userManager.AddToRoleAsync(user, "Admin");
                     }
+                }
+                if (!(await userManager.IsInRoleAsync(await userManager.FindByNameAsync("admin"), "Admin")))
+                {
+                    await userManager.AddToRoleAsync(await userManager.FindByNameAsync("admin"), "Admin");
                 }
 
                 //Create Employee Role

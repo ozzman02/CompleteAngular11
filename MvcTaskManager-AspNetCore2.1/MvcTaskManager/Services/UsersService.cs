@@ -1,15 +1,19 @@
-﻿using System;
-using Microsoft.Extensions.Options;
-using MvcTaskManager.Identity;
+﻿using MvcTaskManager.Identity;
 using MvcTaskManager.ServiceContracts;
 using MvcTaskManager.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace MvcTaskManager.Services
 {
-    /* Service for user authentication */
     public class UsersService : IUsersService
     {
         private readonly AppSettings _appSettings;
@@ -30,6 +34,8 @@ namespace MvcTaskManager.Services
             {
                 var applicationUser = await _applicationUserManager.FindByNameAsync(loginViewModel.Username);
                 applicationUser.PasswordHash = null;
+                if (await this._applicationUserManager.IsInRoleAsync(applicationUser, "Admin")) applicationUser.Role = "Admin";
+                else if (await this._applicationUserManager.IsInRoleAsync(applicationUser, "Employee")) applicationUser.Role = "Employee";
 
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var key = System.Text.Encoding.ASCII.GetBytes(_appSettings.Secret);
@@ -37,7 +43,8 @@ namespace MvcTaskManager.Services
                 {
                     Subject = new ClaimsIdentity(new Claim[] {
                         new Claim(ClaimTypes.Name, applicationUser.Id),
-                        new Claim(ClaimTypes.Email, applicationUser.Email)
+                        new Claim(ClaimTypes.Email, applicationUser.Email),
+                        new Claim(ClaimTypes.Role, applicationUser.Role)
                     }),
                     Expires = DateTime.UtcNow.AddHours(8),
                     SigningCredentials = new Microsoft.IdentityModel.Tokens.SigningCredentials(new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(key), Microsoft.IdentityModel.Tokens.SecurityAlgorithms.HmacSha256Signature)
