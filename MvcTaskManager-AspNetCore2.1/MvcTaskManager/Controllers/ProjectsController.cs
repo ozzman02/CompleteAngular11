@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
@@ -12,7 +13,14 @@ using Project = MvcTaskManager.Models.Project;
 namespace MvcTaskManager.Controllers
 {
     /* Controller for CRUD operations of Projects table */
-    [Authorize]
+
+    /* 
+       In this case don't apply the [Authorize] filter for the entire ProjectsController.
+       You have to apply the same individually for every action method because we cannot use Anti-Forgery
+       and JWT Authentication at-a-time in the same action method.
+
+       In the Startup.cs, we have enabled both JWT and Anti-Forgery but we can use either of those, in every action method.
+    */
     public class ProjectsController : Controller
     {
         private ApplicationDbContext db;
@@ -24,6 +32,7 @@ namespace MvcTaskManager.Controllers
 
         [HttpGet]
         [Route("api/projects")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public List<Project> Get()
         {
             
@@ -33,6 +42,7 @@ namespace MvcTaskManager.Controllers
 
         [HttpGet]
         [Route("api/projects/search/{searchby}/{searchtext}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public List<Project> Search(string searchBy, string searchText)
         {
             
@@ -53,6 +63,8 @@ namespace MvcTaskManager.Controllers
 
         [HttpPost]
         [Route("api/projects")]
+        [Authorize]
+        [ValidateAntiForgeryToken]
         public Project Post([FromBody] Project project)
         {
             
@@ -63,6 +75,7 @@ namespace MvcTaskManager.Controllers
 
         [HttpPut]
         [Route("api/projects")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public Project Put([FromBody] Project project)
         {
             
@@ -83,6 +96,7 @@ namespace MvcTaskManager.Controllers
 
         [HttpDelete]
         [Route("api/projects")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public int Delete(int ProjectID)
         {
             

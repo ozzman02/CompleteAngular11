@@ -1,13 +1,18 @@
 ﻿<Properties StartupConfiguration="{AEF4B8C4-9596-444D-BCDB-5A52E9CB2434}|Default">
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MvcTaskManager/Startup.cs">
+  <MonoDevelop.Ide.ItemProperties.MvcTaskManager PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="MvcTaskManager/Identity/ApplicationDbContext.cs">
     <Files>
-      <File FileName="MvcTaskManager/appsettings.json" />
-      <File FileName="MvcTaskManager/AppSettings.cs" />
-      <File FileName="MvcTaskManager/Startup.cs" Line="45" Column="58" />
-      <File FileName="MvcTaskManager/Services/UsersService.cs" />
-      <File FileName="MvcTaskManager/Identity/ApplicationUser.cs" />
-      <File FileName="MvcTaskManager/Controllers/AccountController.cs" />
+      <File FileName="MvcTaskManager/Startup.cs" Line="73" Column="16" />
+      <File FileName="MvcTaskManager/Identity/ApplicationDbContext.cs" Line="22" Column="10" />
+      <File FileName="MvcTaskManager/Identity/ApplicatioRole.cs" Line="8" Column="48" />
+      <File FileName="MvcTaskManager/Identity/ApplicationUser.cs" Line="8" Column="48" />
+      <File FileName="MvcTaskManager/Services/UsersService.cs" Line="1" Column="1" />
+      <File FileName="MvcTaskManager/Controllers/AccountController.cs" Line="1" Column="1" />
       <File FileName="MvcTaskManager/Controllers/ProjectsController.cs" />
     </Files>
     <Pads>
@@ -17,6 +22,9 @@
             <Node name="MvcTaskManager" expanded="True">
               <Node name="Controllers" expanded="True" />
               <Node name="Identity" expanded="True" />
+              <Node name="Migrations" expanded="True">
+                <Node name="20190506195456_Initial.cs" expanded="True" />
+              </Node>
               <Node name="Models" expanded="True" />
               <Node name="Properties" expanded="True" />
               <Node name="ServiceContracts" expanded="True" />
@@ -32,10 +40,5 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.MvcTaskManager PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
 </Properties>

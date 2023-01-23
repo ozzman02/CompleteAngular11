@@ -1549,13 +1549,16 @@ class LoginService {
   Login(loginViewModel) {
     this.httpClient = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__.HttpClient(this.httpBackend);
     return this.httpClient.post("/authenticate", loginViewModel, {
-      responseType: "json"
-    }).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_1__.map)(user => {
-      if (user) {
-        this.currentUserName = user.userName;
-        sessionStorage['currentUser'] = JSON.stringify(user);
+      responseType: "json",
+      observe: "response"
+    }).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_1__.map)(response => {
+      if (response) {
+        console.log(response.headers.get("xsrf-request-token"));
+        this.currentUserName = response.body.userName;
+        sessionStorage['currentUser'] = JSON.stringify(response.body);
+        sessionStorage['XSRFRequestToken'] = response.headers.get("xsrf-request-token");
       }
-      return user;
+      return response.body;
     }));
   }
   Logout() {
@@ -1706,9 +1709,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ProjectsService": () => (/* binding */ ProjectsService)
 /* harmony export */ });
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ 8987);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ 635);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ 8987);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2560);
+
 
 
 
@@ -1729,7 +1733,10 @@ class ProjectsService {
     }));
   }
   insertProject(newProject) {
+    var requestHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders();
+    requestHeaders = requestHeaders.set("X-XSRF-TOKEN", sessionStorage['XSRFRequestToken']);
     return this.httpClient.post(this.urlPrefix + "/api/projects", newProject, {
+      headers: requestHeaders,
       responseType: "json"
     });
   }
@@ -1749,9 +1756,9 @@ class ProjectsService {
   }
 }
 ProjectsService.ɵfac = function ProjectsService_Factory(t) {
-  return new (t || ProjectsService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient));
+  return new (t || ProjectsService)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpClient));
 };
-ProjectsService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({
+ProjectsService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjectable"]({
   token: ProjectsService,
   factory: ProjectsService.ɵfac,
   providedIn: 'root'

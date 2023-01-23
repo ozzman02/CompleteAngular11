@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { LoginService } from './login.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { LoginService } from './login.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  
+
   constructor(public loginService: LoginService) {}
 
   onSearchClick()

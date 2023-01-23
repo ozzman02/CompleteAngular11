@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { map, Observable } from 'rxjs';
 import { Project } from './project';
 
@@ -26,7 +26,9 @@ export class ProjectsService {
   }
 
   insertProject(newProject: Project): Observable<Project> {
-    return this.httpClient.post<Project>(this.urlPrefix + "/api/projects", newProject, { responseType: "json" });
+    var requestHeaders = new HttpHeaders();
+    requestHeaders = requestHeaders.set("X-XSRF-TOKEN", sessionStorage['XSRFRequestToken']);
+    return this.httpClient.post<Project>(this.urlPrefix + "/api/projects", newProject, { headers: requestHeaders, responseType: "json" });
   }
 
   updateProject(existingProject: Project): Observable<Project> {

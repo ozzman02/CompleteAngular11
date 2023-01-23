@@ -19,13 +19,15 @@ export class LoginService {
   /* We don't want the interceptor to be executed for the login */
   public Login(loginViewModel: LoginViewModel): Observable<any> {
     this.httpClient = new HttpClient(this.httpBackend);
-    return this.httpClient.post<any>("/authenticate", loginViewModel, { responseType: "json" })
-      .pipe(map(user => {
-        if (user) {
-          this.currentUserName = user.userName;
-          sessionStorage['currentUser'] = JSON.stringify(user);
+    return this.httpClient.post<any>("/authenticate", loginViewModel, { responseType: "json", observe: "response" })
+      .pipe(map(response => {
+        if (response) {
+          console.log(response.headers.get("xsrf-request-token"));
+          this.currentUserName = response.body.userName;
+          sessionStorage['currentUser'] = JSON.stringify(response.body);
+          sessionStorage['XSRFRequestToken'] = response.headers.get("xsrf-request-token");
         }
-        return user;
+        return response.body;
       }));
   }
 
