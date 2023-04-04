@@ -12879,23 +12879,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/ovenegas/.nuget/packages/": {},
-    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "/Users/osantamaria/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/ovenegas/git/personal/CompleteAngular11/MvcTaskManager-AspNetCore2.1/MvcTaskManager/MvcTaskManager.csproj",
+      "projectUniqueName": "/Users/osantamaria/Git/CompleteAngular11/MvcTaskManager-AspNetCore2.1/MvcTaskManager/MvcTaskManager.csproj",
       "projectName": "MvcTaskManager",
-      "projectPath": "/Users/ovenegas/git/personal/CompleteAngular11/MvcTaskManager-AspNetCore2.1/MvcTaskManager/MvcTaskManager.csproj",
-      "packagesPath": "/Users/ovenegas/.nuget/packages/",
-      "outputPath": "/Users/ovenegas/git/personal/CompleteAngular11/MvcTaskManager-AspNetCore2.1/MvcTaskManager/obj/",
+      "projectPath": "/Users/osantamaria/Git/CompleteAngular11/MvcTaskManager-AspNetCore2.1/MvcTaskManager/MvcTaskManager.csproj",
+      "packagesPath": "/Users/osantamaria/.nuget/packages/",
+      "outputPath": "/Users/osantamaria/Git/CompleteAngular11/MvcTaskManager-AspNetCore2.1/MvcTaskManager/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "/Users/ovenegas/.nuget/NuGet/NuGet.Config"
+        "/Users/osantamaria/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
@@ -12946,12 +12942,11 @@
           "net47",
           "net471",
           "net472",
-          "net48",
-          "net481"
+          "net48"
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.102/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.100/RuntimeIdentifierGraph.json"
       }
     }
   }

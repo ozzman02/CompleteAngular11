@@ -1,19 +1,7 @@
 ﻿<Properties StartupConfiguration="{AEF4B8C4-9596-444D-BCDB-5A52E9CB2434}|Default">
-  <MonoDevelop.Ide.ItemProperties.MvcTaskManager PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="MvcTaskManager/Identity/ApplicationDbContext.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MvcTaskManager/appsettings.json">
     <Files>
-      <File FileName="MvcTaskManager/Startup.cs" Line="73" Column="16" />
-      <File FileName="MvcTaskManager/Identity/ApplicationDbContext.cs" Line="22" Column="10" />
-      <File FileName="MvcTaskManager/Identity/ApplicatioRole.cs" Line="8" Column="48" />
-      <File FileName="MvcTaskManager/Identity/ApplicationUser.cs" Line="8" Column="48" />
-      <File FileName="MvcTaskManager/Services/UsersService.cs" Line="1" Column="1" />
-      <File FileName="MvcTaskManager/Controllers/AccountController.cs" Line="1" Column="1" />
-      <File FileName="MvcTaskManager/Controllers/ProjectsController.cs" />
+      <File FileName="MvcTaskManager/appsettings.json" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -34,11 +22,18 @@
                 <Node name="Home" expanded="True" />
               </Node>
               <Node name="wwwroot" expanded="True" />
+              <Node name="appsettings.json" selected="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.MvcTaskManager PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>
