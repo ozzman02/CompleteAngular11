@@ -1,56 +1,57 @@
-package com.taskmanager.model;
+package com.taskmanager.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.type.SqlTypes;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
-
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Project {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @JdbcTypeCode(SqlTypes.CHAR)
+    @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
+    private UUID id;
 
+    @NotBlank
+    @NotNull
     @Column
     private String projectName;
 
+    @NotBlank
+    @NotNull
     @Column
-    @Temporal(TemporalType.DATE)
-    private Date dateOfStart;
+    private LocalDate dateOfStart;
 
+    @NotBlank
+    @NotNull
     @Column
-    private int teamSize;
+    private Integer teamSize;
 
-    public Long getId() {
-        return id;
-    }
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime createdDate;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @UpdateTimestamp
+    private LocalDateTime updateDate;
 
-    public String getProjectName() {
-        return projectName;
-    }
+    @Version
+    private Integer version;
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
-    }
-
-    public Date getDateOfStart() {
-        return dateOfStart;
-    }
-
-    public void setDateOfStart(Date dateOfStart) {
-        this.dateOfStart = dateOfStart;
-    }
-
-    public int getTeamSize() {
-        return teamSize;
-    }
-
-    public void setTeamSize(int teamSize) {
-        this.teamSize = teamSize;
-    }
 }

@@ -1,9 +1,11 @@
 package com.taskmanager.repository;
 
-import com.taskmanager.model.Project;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.web.bind.annotation.RestController;
+import com.taskmanager.entity.Project;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-@RestController
-public interface ProjectRepository extends CrudRepository<Project, Long> {
+import java.util.UUID;
+
+@Repository
+public interface ProjectRepository extends JpaRepository<Project, UUID> {
 }

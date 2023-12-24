@@ -1,26 +1,25 @@
 package com.taskmanager.service.impl;
 
-import com.taskmanager.model.Project;
+import com.taskmanager.mapper.ProjectMapper;
+import com.taskmanager.model.ProjectDTO;
 import com.taskmanager.repository.ProjectRepository;
 import com.taskmanager.service.ProjectService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectRepository projectRepository;
 
-    @Autowired
-    public ProjectServiceImpl(ProjectRepository projectRepository) {
-        this.projectRepository = projectRepository;
-    }
+    private final ProjectMapper projectMapper;
 
     @Override
-    public List<Project> findAll() {
-        return (List<Project>) projectRepository.findAll();
+    public List<ProjectDTO> findAll() {
+        return projectRepository.findAll().stream().map(projectMapper::projectToProjectDto).toList();
     }
 
 }
