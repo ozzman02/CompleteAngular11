@@ -3,18 +3,16 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { AboutComponent } from './components/about/about.component'
+import { AdminModule } from './modules/admin/admin.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DashboardComponent,
-    AboutComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AdminModule
   ],
   providers: [
     provideClientHydration()
