@@ -4,6 +4,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
 import { AboutComponent } from './components/about/about.component';
 import { DashboardService } from './services/dashboard/dashboard.service';
+import { ProjectComponent } from './components/project/project.component';
 
 
 
@@ -11,7 +12,8 @@ import { DashboardService } from './services/dashboard/dashboard.service';
   declarations: [
     DashboardComponent,
     MyProfileComponent,
-    AboutComponent
+    AboutComponent,
+    ProjectComponent
   ],
   imports: [
     CommonModule
@@ -19,7 +21,8 @@ import { DashboardService } from './services/dashboard/dashboard.service';
   exports: [
     DashboardComponent,
     MyProfileComponent,
-    AboutComponent
+    AboutComponent,
+    ProjectComponent
   ],
   providers: [
     DashboardService
