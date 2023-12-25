@@ -1,10 +1,8 @@
 package com.taskmanager.controller;
 
-import com.taskmanager.entity.Project;
 import com.taskmanager.model.ProjectDTO;
 import com.taskmanager.service.ProjectService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
