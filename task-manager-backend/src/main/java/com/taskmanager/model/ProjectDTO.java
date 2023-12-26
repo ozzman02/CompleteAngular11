@@ -19,11 +19,9 @@ public class ProjectDTO {
     @NotNull
     private String projectName;
 
-    @NotBlank
     @NotNull
     private LocalDate dateOfStart;
 
-    @NotBlank
     @NotNull
     private Integer teamSize;
 

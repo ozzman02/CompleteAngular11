@@ -34,12 +34,10 @@ public class Project {
     @Column
     private String projectName;
 
-    @NotBlank
     @NotNull
     @Column
     private LocalDate dateOfStart;
 
-    @NotBlank
     @NotNull
     @Column
     private Integer teamSize;
@@ -52,6 +50,7 @@ public class Project {
     private LocalDateTime updateDate;
 
     @Version
+    @NotNull
     private Integer version;
 
 }

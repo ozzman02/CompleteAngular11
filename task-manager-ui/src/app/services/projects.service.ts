@@ -15,4 +15,13 @@ export class ProjectsService {
   getAllProjects(): Observable<Project[]> {
     return this.httpClient.get<Project[]>(this.urlEndpoint);
   }
+
+  insertProject(newProject: Project): Observable<Project> {
+    return this.httpClient.post<Project>(this.urlEndpoint, newProject);
+  }
+
+  updateProject(existingProject: Project): Observable<Project> {
+    return this.httpClient.put<Project>(this.urlEndpoint, existingProject);
+  }
+
 }

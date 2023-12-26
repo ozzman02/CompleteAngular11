@@ -8,4 +8,8 @@ public interface ProjectService {
 
     List<ProjectDTO> findAll();
 
+    ProjectDTO saveProject(ProjectDTO projectDTO);
+
+    ProjectDTO updateProject(ProjectDTO projectDTO);
+
 }
