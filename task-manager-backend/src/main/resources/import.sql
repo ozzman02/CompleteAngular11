@@ -1,5 +1,0 @@
-INSERT INTO project (id, date_of_start, project_name, team_size, created_date, update_date, version) VALUES ('395e6856-de4d-4911-968b-de2b68bb450b', '2023-04-05', 'Front Management System', 10, GETDATE()-1, GETDATE()-1, 0);
-INSERT INTO project (id, date_of_start, project_name, team_size, created_date, update_date, version) VALUES ('de02966f-5b3f-4ce2-987c-b20a7cdea930', '2023-04-05', 'Reporting Tool', 5, GETDATE()-1, GETDATE()-1, 0);
-INSERT INTO project (id, date_of_start, project_name, team_size, created_date, update_date, version) VALUES ('aacc54bb-3e0c-424d-822a-9170a07c3bc8', '2023-04-05', 'Hospital Management System', 20, GETDATE()-1, GETDATE()-1, 0);
-INSERT INTO project (id, date_of_start, project_name, team_size, created_date, update_date, version) VALUES ('421e1395-764d-4662-aab1-d3b7f1ae1753', '2023-04-05', 'Pharmacy Application', 15, GETDATE()-1, GETDATE()-1, 0);
-INSERT INTO project (id, date_of_start, project_name, team_size, created_date, update_date, version) VALUES ('48f0e2b6-3456-4124-8a98-036e6e7a7f41', '2023-04-05', 'Advanced Accounting System', 4, GETDATE()-1, GETDATE()-1, 0);

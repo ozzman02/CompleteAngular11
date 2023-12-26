@@ -31,7 +31,7 @@ export class ProjectComponent implements OnInit {
   onSaveClick(): void {
     this.projectService.insertProject(this.newProject).subscribe(
       (response: Project) => {
-        let p: Project = this.copyProject(response);
+        let p: Project = this.cloneProject(response);
         this.projects.push(p);
         this.clearProjectValues(this.newProject);
       },
@@ -49,14 +49,14 @@ export class ProjectComponent implements OnInit {
     this.editProject.createdDate = this.projects[index].createdDate;
     this.editProject.updateDate = this.projects[index].updateDate;
     this.editProject.version = this.projects[index].version;*/
-    this.editProject = this.copyProject(this.projects[index]);
+    this.editProject = this.cloneProject(this.projects[index]);
     this.editIndex = index;
   }
 
   onUpdateClick(): void {
     this.projectService.updateProject(this.editProject).subscribe(
       (response: Project) => {
-        let p: Project = this.copyProject(response);
+        let p: Project = this.cloneProject(response);
         this.projects[this.editIndex] = p;
         this.clearProjectValues(this.editProject);
       },
@@ -76,7 +76,7 @@ export class ProjectComponent implements OnInit {
     project.updateDate = null;
   }
 
-  private copyProject(project: Project) {
+  private cloneProject(project: Project) {
     let p: Project = new Project();
     p.id = project.id;
     p.projectName = project.projectName;
