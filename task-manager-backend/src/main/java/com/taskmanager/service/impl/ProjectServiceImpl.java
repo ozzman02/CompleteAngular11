@@ -8,9 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Comparator;
-import java.util.List;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Service
@@ -21,6 +22,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectMapper projectMapper;
 
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     @Override
     @Transactional(readOnly = true)
     public List<ProjectDTO> findAll() {
@@ -39,6 +41,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    @Transactional
     public ProjectDTO updateProject(ProjectDTO projectDTO) {
         AtomicReference<ProjectDTO> projectDTOAtomicReference = new AtomicReference<>();
         projectRepository.findById(projectDTO.getId()).ifPresentOrElse(existingProject -> {
@@ -52,5 +55,41 @@ public class ProjectServiceImpl implements ProjectService {
         }, () -> projectDTOAtomicReference.set(null));
         return projectDTOAtomicReference.get();
     }
+
+    @Override
+    @Transactional
+    public String deleteProjectById(UUID id) {
+        if (projectRepository.existsById(id)) {
+            projectRepository.deleteById(id);
+            return id.toString();
+        }
+        return null;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ProjectDTO> search(String searchBy, String searchText) {
+        return Collections.unmodifiableList(switch (searchBy) {
+            case "projectId" -> projectRepository.findAllById(UUID.fromString(searchText.trim())).stream()
+                    .map(projectMapper::projectToProjectDto)
+                    .sorted(Comparator.comparing(ProjectDTO::getCreatedDate))
+                    .toList();
+            case "projectName" -> projectRepository.findAllByProjectNameContainingIgnoreCase(searchText.trim()).stream()
+                    .map(projectMapper::projectToProjectDto)
+                    .sorted(Comparator.comparing(ProjectDTO::getCreatedDate))
+                    .toList();
+            case "dateOfStart" -> projectRepository
+                    .findAllByDateOfStart(LocalDate.from(FORMATTER.parse(searchText.trim()))).stream()
+                    .map(projectMapper::projectToProjectDto)
+                    .sorted(Comparator.comparing(ProjectDTO::getCreatedDate))
+                    .toList();
+            case "teamSize" -> projectRepository.findAllByTeamSize(Integer.parseInt(searchText.trim())).stream()
+                    .map(projectMapper::projectToProjectDto)
+                    .sorted(Comparator.comparing(ProjectDTO::getCreatedDate))
+                    .toList();
+            default -> this.findAll();
+        });
+    }
+
 
 }
