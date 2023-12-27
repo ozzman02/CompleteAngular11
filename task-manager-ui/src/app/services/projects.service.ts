@@ -24,4 +24,15 @@ export class ProjectsService {
     return this.httpClient.put<Project>(this.urlEndpoint, existingProject);
   }
 
+  deleteProject(projectId: string | null): Observable<string> {
+    return this.httpClient.delete<string>(this.urlEndpoint + "?projectId=" + projectId);
+  }
+
+  searchProjects(searchBy: string, searchText: string): Observable<Project[]> {
+    if (typeof searchText === 'string' && searchText.trim().length === 0) {
+      searchText = 'all';
+    }
+    return this.httpClient.get<Project[]>(this.urlEndpoint + "/search/" + searchBy + "/" + searchText);
+  }
+
 }

@@ -16,7 +16,15 @@ export class ProjectComponent implements OnInit {
 
   editProject: Project = new Project();
 
-  editIndex: any  = null;
+  editIndex: any = null;
+
+  deleteProject: Project = new Project();
+
+  deleteIndex: any = null;
+
+  searchBy: string = "projectName";
+  
+  searchText: string = '';
 
   constructor(private projectService: ProjectsService) { }
 
@@ -42,15 +50,8 @@ export class ProjectComponent implements OnInit {
   }
 
   onEditClick(event: any, index: number): void {
-    /*this.editProject.id = this.projects[index].id;
-    this.editProject.projectName = this.projects[index].projectName;
-    this.editProject.teamSize = this.projects[index].teamSize;
-    this.editProject.dateOfStart = this.projects[index].dateOfStart;
-    this.editProject.createdDate = this.projects[index].createdDate;
-    this.editProject.updateDate = this.projects[index].updateDate;
-    this.editProject.version = this.projects[index].version;*/
-    this.editProject = this.cloneProject(this.projects[index]);
     this.editIndex = index;
+    this.editProject = this.cloneProject(this.projects[index]);
   }
 
   onUpdateClick(): void {
@@ -64,6 +65,35 @@ export class ProjectComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  onDeleteClick(event: any, index: number): void {
+    this.deleteIndex = index;
+    this.deleteProject = this.cloneProject(this.projects[index]);
+  }
+
+  onDeleteConfirmClick(): void {
+    this.projectService.deleteProject(this.deleteProject.id).subscribe(
+      (response: string) => {
+        this.projects.splice(this.deleteIndex, 1);
+        this.clearProjectValues(this.deleteProject);
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  }
+
+  onSearchClick(): void {
+    this.projectService.searchProjects(this.searchBy, this.searchText).subscribe(
+      (response: Project[]) => {
+        this.projects = response;
+        
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
   }
 
   private clearProjectValues(project: Project) {
