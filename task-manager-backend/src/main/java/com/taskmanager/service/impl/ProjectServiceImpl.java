@@ -61,7 +61,7 @@ public class ProjectServiceImpl implements ProjectService {
     public String deleteProjectById(UUID id) {
         if (projectRepository.existsById(id)) {
             projectRepository.deleteById(id);
-            return id.toString();
+            return id.toString().trim();
         }
         return null;
     }

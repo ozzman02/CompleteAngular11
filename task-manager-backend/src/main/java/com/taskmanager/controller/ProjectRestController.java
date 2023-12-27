@@ -4,10 +4,10 @@ import com.taskmanager.model.ProjectDTO;
 import com.taskmanager.service.ProjectService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @CrossOrigin(origins = {"http://localhost:4200"})
@@ -19,28 +19,29 @@ public class ProjectRestController {
     private final ProjectService projectService;
 
     @GetMapping
-    public List<ProjectDTO> getProjects() {
-        return projectService.findAll();
+    public ResponseEntity<?> getProjects() {
+        return new ResponseEntity<>(projectService.findAll(), HttpStatus.OK);
     }
 
     @PostMapping
-    public ProjectDTO saveProject(@Valid @RequestBody ProjectDTO projectDTO) {
-        return projectService.saveProject(projectDTO);
+    public ResponseEntity<?> saveProject(@Valid @RequestBody ProjectDTO projectDTO) {
+        return new ResponseEntity<>(projectService.saveProject(projectDTO), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ProjectDTO updateProject(@Valid @RequestBody ProjectDTO projectDTO) {
-        return projectService.updateProject(projectDTO);
+    public ResponseEntity<?> updateProject(@Valid @RequestBody ProjectDTO projectDTO) {
+        return new ResponseEntity<>(projectService.updateProject(projectDTO), HttpStatus.OK);
     }
 
     @DeleteMapping
-    public String deleteProjectById(@RequestParam String projectId) {
-        return projectService.deleteProjectById(UUID.fromString(projectId.trim()));
+    public ResponseEntity<?> deleteProjectById(@RequestParam String projectId) {
+        return new ResponseEntity<>(projectService.deleteProjectById(UUID.fromString(projectId.trim())),
+                HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/search/{searchBy}/{searchText}")
-    public List<ProjectDTO> search(@PathVariable String searchBy, @PathVariable String searchText) {
-        return projectService.search(searchBy, searchText);
+    public ResponseEntity<?> search(@PathVariable String searchBy, @PathVariable String searchText) {
+        return new ResponseEntity<>(projectService.search(searchBy, searchText), HttpStatus.OK) ;
     }
 
 }
