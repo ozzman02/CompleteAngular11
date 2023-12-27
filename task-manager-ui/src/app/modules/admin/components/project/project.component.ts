@@ -97,11 +97,11 @@ export class ProjectComponent implements OnInit {
   }
 
   private clearProjectValues(project: Project) {
-    project.id = null;
-    project.projectName = null;
+    project.id = '';
+    project.projectName = '';
     project.dateOfStart = null;
-    project.teamSize = null;
-    project.version = null;
+    project.teamSize = 0;
+    project.version = 0;
     project.createdDate = null;
     project.updateDate = null;
   }

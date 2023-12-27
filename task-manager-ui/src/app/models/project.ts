@@ -1,10 +1,10 @@
 export class Project {
 
-    id: string | null;
-    projectName: string | null;
+    id: string;
+    projectName: string;
     dateOfStart: Date | null;
-    teamSize: number | null;
-    version: number | null;
+    teamSize: number;
+    version: number;
     createdDate: Date | null;
     updateDate: Date | null;
 
