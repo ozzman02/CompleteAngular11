@@ -70,26 +70,41 @@ public class ProjectServiceImpl implements ProjectService {
     @Transactional(readOnly = true)
     public List<ProjectDTO> search(String searchBy, String searchText) {
         return Collections.unmodifiableList(switch (searchBy) {
-            case "projectId" -> projectRepository.findAllById(UUID.fromString(searchText.trim())).stream()
-                    .map(projectMapper::projectToProjectDto)
-                    .sorted(Comparator.comparing(ProjectDTO::getCreatedDate))
-                    .toList();
-            case "projectName" -> projectRepository.findAllByProjectNameContainingIgnoreCase(searchText.trim()).stream()
-                    .map(projectMapper::projectToProjectDto)
-                    .sorted(Comparator.comparing(ProjectDTO::getCreatedDate))
-                    .toList();
-            case "dateOfStart" -> projectRepository
-                    .findAllByDateOfStart(LocalDate.from(FORMATTER.parse(searchText.trim()))).stream()
-                    .map(projectMapper::projectToProjectDto)
-                    .sorted(Comparator.comparing(ProjectDTO::getCreatedDate))
-                    .toList();
-            case "teamSize" -> projectRepository.findAllByTeamSize(Integer.parseInt(searchText.trim())).stream()
-                    .map(projectMapper::projectToProjectDto)
-                    .sorted(Comparator.comparing(ProjectDTO::getCreatedDate))
-                    .toList();
+            case "projectId" -> searchByProjectId(searchText);
+            case "projectName" -> searchByProjectName(searchText);
+            case "dateOfStart" -> searchByDateOfStart(searchText);
+            case "teamSize" -> searchByTeamSize(searchText);
             default -> this.findAll();
         });
     }
 
+    private List<ProjectDTO> searchByProjectId(String searchText) {
+        return projectRepository.findAllById(UUID.fromString(searchText.trim())).stream()
+                .map(projectMapper::projectToProjectDto)
+                .sorted(Comparator.comparing(ProjectDTO::getCreatedDate))
+                .toList();
+    }
+
+    private List<ProjectDTO> searchByProjectName(String searchText) {
+        return projectRepository.findAllByProjectNameContainingIgnoreCase(searchText.trim()).stream()
+                .map(projectMapper::projectToProjectDto)
+                .sorted(Comparator.comparing(ProjectDTO::getCreatedDate))
+                .toList();
+    }
+
+    private List<ProjectDTO> searchByDateOfStart(String searchText) {
+        return projectRepository
+                .findAllByDateOfStart(LocalDate.from(FORMATTER.parse(searchText.trim()))).stream()
+                .map(projectMapper::projectToProjectDto)
+                .sorted(Comparator.comparing(ProjectDTO::getCreatedDate))
+                .toList();
+    }
+
+    private List<ProjectDTO> searchByTeamSize(String searchText) {
+        return projectRepository.findAllByTeamSize(Integer.parseInt(searchText.trim())).stream()
+                .map(projectMapper::projectToProjectDto)
+                .sorted(Comparator.comparing(ProjectDTO::getCreatedDate))
+                .toList();
+    }
 
 }
