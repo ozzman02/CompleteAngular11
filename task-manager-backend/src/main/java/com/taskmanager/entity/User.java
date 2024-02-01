@@ -1,6 +1,8 @@
 package com.taskmanager.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -12,8 +14,8 @@ import org.hibernate.type.SqlTypes;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -22,11 +24,11 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "projects")
-public class Project implements Serializable {
+@Table(name = "users")
+public class User implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 564990452662589965L;
+    private static final long serialVersionUID = 6435222627188405865L;
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -35,18 +37,36 @@ public class Project implements Serializable {
     @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
     private UUID id;
 
+    @Column(unique = true, length = 20)
+    private String username;
+
+    @Column(length = 60)
+    private String password;
+
+    @Builder.Default
+    private Boolean enabled = true;
+
     @NotBlank
     @NotNull
-    @Column
-    private String projectName;
+    private String firstName;
 
+    @NotBlank
     @NotNull
-    @Column
-    private LocalDate dateOfStart;
+    private String lastName;
 
-    @NotNull
-    @Column
-    private Integer teamSize;
+    @Email
+    @Column(unique = true)
+    private String email;
+
+    @Singular
+    @JsonManagedReference
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+    )
+    private Set<Role> roles;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -54,9 +74,5 @@ public class Project implements Serializable {
 
     @UpdateTimestamp
     private LocalDateTime updateDate;
-
-    @Version
-    @NotNull
-    private Integer version;
 
 }

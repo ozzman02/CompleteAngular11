@@ -1,5 +1,7 @@
 package com.taskmanager.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -12,21 +14,21 @@ import org.hibernate.type.SqlTypes;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
 import java.util.UUID;
 
-@Getter
 @Setter
-@Builder
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
-@Table(name = "projects")
-public class Project implements Serializable {
+@Table(name = "roles")
+public class Role implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 564990452662589965L;
+    private static final long serialVersionUID = -8057483785666882987L;
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -37,16 +39,11 @@ public class Project implements Serializable {
 
     @NotBlank
     @NotNull
-    @Column
-    private String projectName;
+    private String name;
 
-    @NotNull
-    @Column
-    private LocalDate dateOfStart;
-
-    @NotNull
-    @Column
-    private Integer teamSize;
+    @JsonBackReference
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -54,9 +51,5 @@ public class Project implements Serializable {
 
     @UpdateTimestamp
     private LocalDateTime updateDate;
-
-    @Version
-    @NotNull
-    private Integer version;
 
 }

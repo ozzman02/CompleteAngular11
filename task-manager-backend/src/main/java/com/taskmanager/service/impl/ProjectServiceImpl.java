@@ -11,7 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Service
@@ -23,6 +26,7 @@ public class ProjectServiceImpl implements ProjectService {
     private final ProjectMapper projectMapper;
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
     @Override
     @Transactional(readOnly = true)
     public List<ProjectDTO> findAll() {
@@ -34,26 +38,24 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     @Transactional
-    public ProjectDTO saveProject(ProjectDTO projectDTO) {
-        projectDTO.setCreatedDate(LocalDateTime.now());
-        projectDTO.setUpdateDate(LocalDateTime.now());
-        return projectMapper.projectToProjectDto(projectRepository.save(projectMapper.projectDtoToProject(projectDTO)));
-    }
-
-    @Override
-    @Transactional
-    public ProjectDTO updateProject(ProjectDTO projectDTO) {
-        AtomicReference<ProjectDTO> projectDTOAtomicReference = new AtomicReference<>();
-        projectRepository.findById(projectDTO.getId()).ifPresentOrElse(existingProject -> {
-            existingProject.setProjectName(projectDTO.getProjectName());
-            existingProject.setDateOfStart(projectDTO.getDateOfStart());
-            existingProject.setTeamSize(projectDTO.getTeamSize());
-            existingProject.setUpdateDate(LocalDateTime.now());
-            existingProject.setVersion(projectDTO.getVersion() + 1);
-            projectDTOAtomicReference.set(projectMapper.projectToProjectDto(existingProject));
-            projectRepository.save(existingProject);
-        }, () -> projectDTOAtomicReference.set(null));
-        return projectDTOAtomicReference.get();
+    public ProjectDTO saveOrUpdate(ProjectDTO projectDTO) {
+        if (projectDTO.getId() == null) {
+            projectDTO.setCreatedDate(LocalDateTime.now());
+            projectDTO.setUpdateDate(LocalDateTime.now());
+            return projectMapper.projectToProjectDto(projectRepository.save(projectMapper.projectDtoToProject(projectDTO)));
+        } else {
+            AtomicReference<ProjectDTO> projectDTOAtomicReference = new AtomicReference<>();
+            projectRepository.findById(projectDTO.getId()).ifPresentOrElse(existingProject -> {
+                existingProject.setProjectName(projectDTO.getProjectName());
+                existingProject.setDateOfStart(projectDTO.getDateOfStart());
+                existingProject.setTeamSize(projectDTO.getTeamSize());
+                existingProject.setUpdateDate(LocalDateTime.now());
+                existingProject.setVersion(projectDTO.getVersion() + 1);
+                projectDTOAtomicReference.set(projectMapper.projectToProjectDto(existingProject));
+                projectRepository.save(existingProject);
+            }, () -> projectDTOAtomicReference.set(null));
+            return projectDTOAtomicReference.get();
+        }
     }
 
     @Override

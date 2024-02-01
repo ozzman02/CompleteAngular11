@@ -9,9 +9,7 @@ public interface ProjectService {
 
     List<ProjectDTO> findAll();
 
-    ProjectDTO saveProject(ProjectDTO projectDTO);
-
-    ProjectDTO updateProject(ProjectDTO projectDTO);
+    ProjectDTO saveOrUpdate(ProjectDTO projectDTO);
 
     String deleteProjectById(UUID id);
 
