@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from '../../../../models/project';
-import { ProjectsService } from '../../../../services/projects.service';
+import { Project } from '../../models/project';
+import { ProjectsService } from '../../services/project/projects.service';
 
 @Component({
   selector: 'app-project',
@@ -38,8 +38,8 @@ export class ProjectComponent implements OnInit {
   
   onSaveClick(): void {
     this.projectService.insertProject(this.newProject).subscribe(
-      (response: Project) => {
-        let p: Project = this.cloneProject(response);
+      (response: any) => {
+        let p: Project = this.cloneProject(response.body);
         this.projects.push(p);
         this.clearProjectValues(this.newProject);
       },
@@ -56,8 +56,8 @@ export class ProjectComponent implements OnInit {
 
   onUpdateClick(): void {
     this.projectService.updateProject(this.editProject).subscribe(
-      (response: Project) => {
-        let p: Project = this.cloneProject(response);
+      (response: any) => {
+        let p: Project = this.cloneProject(response.body);
         this.projects[this.editIndex] = p;
         this.clearProjectValues(this.editProject);
       },
@@ -74,7 +74,7 @@ export class ProjectComponent implements OnInit {
 
   onDeleteConfirmClick(): void {
     this.projectService.deleteProject(this.deleteProject.id).subscribe(
-      (response: string) => {
+      (response: any) => {
         this.projects.splice(this.deleteIndex, 1);
         this.clearProjectValues(this.deleteProject);
       },
@@ -86,8 +86,8 @@ export class ProjectComponent implements OnInit {
 
   onSearchClick(): void {
     this.projectService.searchProjects(this.searchBy, this.searchText).subscribe(
-      (response: Project[]) => {
-        this.projects = response;
+      (response: any) => {
+        this.projects = response as Project[];
         
       },
       (error) => {
