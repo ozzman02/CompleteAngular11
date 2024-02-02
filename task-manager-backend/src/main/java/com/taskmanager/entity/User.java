@@ -1,6 +1,8 @@
 package com.taskmanager.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -41,6 +43,7 @@ public class User implements Serializable {
     private String username;
 
     @Column(length = 60)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @Builder.Default
@@ -59,6 +62,7 @@ public class User implements Serializable {
     private String email;
 
     @Singular
+    @JsonIgnore
     @JsonManagedReference
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
