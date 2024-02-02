@@ -11,7 +11,7 @@ export class ProjectsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllProjects() {
+  /*getAllProjects() {
     return this.httpClient.get<Project[]>(AppConstants.PROJECTS_API_URL, {responseType: "json"}).pipe(
       map(
         (data: Project[]) => {
@@ -22,11 +22,11 @@ export class ProjectsService {
         }
       )
     );
-  }
-
-  /*getAllProjects() {
-    return this.httpClient.get<Project[]>(AppConstants.PROJECTS_API_URL, { observe: 'response' });
   }*/
+
+  getAllProjects() {
+    return this.httpClient.get<Project[]>(AppConstants.PROJECTS_API_URL, { observe: 'response', responseType: 'json' });
+  }
 
   insertProject(newProject: Project) {
     return this.httpClient.post<Project>(AppConstants.PROJECTS_API_URL, newProject, { observe: 'response', withCredentials: true });

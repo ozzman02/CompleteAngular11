@@ -7,7 +7,6 @@ export class User {
     lastName: string;
     email: string;
     roles: string[] = [];
-    authStatus: string;
     createdDate: Date;
     updateDate: Date;
 }

@@ -12,15 +12,18 @@ export class XhrInterceptor implements HttpInterceptor {
     constructor(private router: Router) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log("inside the interceptor");
         let httpHeaders = new HttpHeaders();
         if (sessionStorage.getItem('userdetails')) {
             this.user = JSON.parse(sessionStorage.getItem('userdetails')!);
         }
+        /* Important for the login operation and for other scenarios we are sending the jwt token in the else block */
         if (this.user && this.user.username && this.user.password) {
-            console.log(this.user.username);
-            console.log(this.user.password);
             httpHeaders = httpHeaders.append('Authorization', 'Basic ' + window.btoa(this.user.username + ':' + this.user.password));
+        } else {
+            let authorization = sessionStorage.getItem('Authorization');
+            if (authorization) {
+                httpHeaders = httpHeaders.append('Authorization', authorization);
+            }
         }
         let xsrf = sessionStorage.getItem('XSRF-TOKEN');
         if (xsrf) {

@@ -30,10 +30,14 @@ export class ProjectComponent implements OnInit {
 
   ngOnInit(): void {
     this.projectService.getAllProjects().subscribe(
-      (response: Project[]) => {
-        this.projects = response;
+      (response: any) => {
+        this.projects = response.body;
       }
     );
+  }
+
+  isSearchByAll() {
+    return this.searchBy === 'all';
   }
   
   onSaveClick(): void {
@@ -87,8 +91,11 @@ export class ProjectComponent implements OnInit {
   onSearchClick(): void {
     this.projectService.searchProjects(this.searchBy, this.searchText).subscribe(
       (response: any) => {
-        this.projects = response as Project[];
-        
+        console.log(response);
+        this.projects = response.body as Project[];
+        if (this.searchBy === 'all') {
+          this.searchText = '';
+        }
       },
       (error) => {
         console.log(error);
