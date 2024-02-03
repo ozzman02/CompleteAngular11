@@ -24,26 +24,26 @@ public class ProjectController {
     }
 
     @PostMapping
-    //@PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
     public ResponseEntity<?> saveProject(@Valid @RequestBody ProjectDTO projectDTO) {
         return new ResponseEntity<>(projectService.saveOrUpdate(projectDTO), HttpStatus.CREATED);
     }
 
     @PutMapping
-    //@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
     public ResponseEntity<?> updateProject(@Valid @RequestBody ProjectDTO projectDTO) {
         return new ResponseEntity<>(projectService.saveOrUpdate(projectDTO), HttpStatus.OK);
     }
 
     @DeleteMapping
-    //@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
     public ResponseEntity<?> deleteProjectById(@RequestParam String projectId) {
         return new ResponseEntity<>(projectService.deleteProjectById(UUID.fromString(projectId.trim())),
                 HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/search/{searchBy}/{searchText}")
-    //@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
     public ResponseEntity<?> search(@PathVariable String searchBy, @PathVariable String searchText) {
         return new ResponseEntity<>(projectService.search(searchBy, searchText), HttpStatus.OK) ;
     }

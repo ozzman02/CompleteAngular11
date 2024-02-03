@@ -1,10 +1,13 @@
 package com.taskmanager.configuration.security;
 
-import com.taskmanager.configuration.security.filter.*;
+import com.taskmanager.configuration.security.filter.CsrfCookieFilter;
+import com.taskmanager.configuration.security.filter.JWTTokenGeneratorFilter;
+import com.taskmanager.configuration.security.filter.JWTTokenValidatorFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,8 +24,7 @@ import static com.taskmanager.constants.ApplicationConstants.*;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 @Configuration
-//@EnableWebSecurity(debug = true)
-//@EnableMethodSecurity
+@EnableMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfiguration {
 
     @Bean
@@ -49,13 +51,13 @@ public class SecurityConfiguration {
                         .ignoringRequestMatchers("/api/projects")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
-                .addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
-                .addFilterAfter(new AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter.class)
-                .addFilterAt(new AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter.class)
+                //.addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
+                //.addFilterAfter(new AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter.class)
+                //.addFilterAt(new AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter.class)
                 .addFilterAfter(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
                 .addFilterBefore(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests((requests) -> requests
-                        /*.requestMatchers(HttpMethod.POST, "/api/projects").hasAnyRole("USER", "ADMIN")
+                        /*.requestMatchers(HttpMethod.POST, "/api/projects").hasAnyAuthority("USER", "ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/projects").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/projects").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/projects/search/**").hasAnyRole("USER", "ADMIN")*/
@@ -64,7 +66,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.DELETE, "/api/projects").authenticated()
                         .requestMatchers(HttpMethod.GET, "/api/projects/search/**").authenticated()
                         .requestMatchers(HttpMethod.GET, "/api/user").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/api/projects").permitAll())
+                        .requestMatchers(HttpMethod.GET, "/api/projects").authenticated())
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
         return http.build();
