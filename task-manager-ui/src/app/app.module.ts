@@ -12,6 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { XhrInterceptor } from './interceptors/xhr-interceptor';
 import { AuthActivateRouteGuard } from './guards/auth-activate-route-guard';
+import { JwtModule } from '@auth0/angular-jwt';
 
 
 @NgModule({
@@ -28,6 +29,13 @@ import { AuthActivateRouteGuard } from './guards/auth-activate-route-guard';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return (sessionStorage.getItem("userdetails") ? sessionStorage.getItem("Authorization") : null);
+        }
+      }
+    }),
     HttpClientXsrfModule.withOptions({
       cookieName: 'XSRF-TOKEN',
       headerName: 'X-XSRF-TOKEN',

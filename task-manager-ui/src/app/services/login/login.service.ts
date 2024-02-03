@@ -33,6 +33,8 @@ export class LoginService {
 
   logout() {
     this.currentUserName = null;
+    sessionStorage.removeItem("userdetails");
+    sessionStorage.removeItem("Authorization");
   }
   
 }

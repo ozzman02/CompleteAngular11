@@ -14,8 +14,6 @@ import { getCookie } from 'typescript-cookie';
 })
 export class LoginComponent implements OnInit {
   
-  authStatus: string = "";
-
   user: User = new User();
 
   loginError: string = "";

@@ -23,7 +23,7 @@ export class XhrInterceptor implements HttpInterceptor {
             let authorization = sessionStorage.getItem('Authorization');
             if (authorization) {
                 httpHeaders = httpHeaders.append('Authorization', authorization);
-            }
+            } 
         }
         let xsrf = sessionStorage.getItem('XSRF-TOKEN');
         if (xsrf) {
@@ -36,11 +36,11 @@ export class XhrInterceptor implements HttpInterceptor {
         return next.handle(xhr).pipe(tap(
             (error: any) => {
                 if (error instanceof HttpErrorResponse) {
-                    if (error.status !== 401) {
+                    if (error.status !== 401) {    
                         return;
-                    }
-                    this.router.navigate(['dashboard']);
-                }
+                    } 
+                    //this.router.navigate(['dashboard']);
+                } 
             }
         ));
     }
