@@ -13,12 +13,19 @@ export class AuthActivateRouteGuard implements CanActivate {
     
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | 
         Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-        if (sessionStorage.getItem('userdetails') && !this.jwtHelperService.isTokenExpired()) {
-            this.user = JSON.parse(sessionStorage.getItem('userdetails')!);
-        }
-        if (!this.user || this.jwtHelperService.isTokenExpired()) {
+
+        let valid: boolean = false;
+        let token = JSON.stringify(this.jwtHelperService.tokenGetter());
+        this.user = JSON.parse(sessionStorage.getItem('userdetails')!); 
+        
+        if (Object.keys(this.user).length !== 0 && !this.jwtHelperService.isTokenExpired() 
+            && this.jwtHelperService.decodeToken(token).authorities.includes(route.data["expectedRole"])) {
+            valid = true;
+        } 
+        if (Object.keys(this.user).length === 0 || this.jwtHelperService.isTokenExpired()) {
             this.router.navigate(['login']);
+            valid = false;
         }
-        return this.user ? true : false;
+        return valid;
     }
 }

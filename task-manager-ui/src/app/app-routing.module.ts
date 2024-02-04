@@ -10,9 +10,9 @@ import { AuthActivateRouteGuard } from './guards/auth-activate-route-guard';
 const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" },
   { path: "login", component: LoginComponent },
-  { path: "dashboard", component: DashboardComponent, canActivate: [AuthActivateRouteGuard] },
+  { path: "dashboard", component: DashboardComponent, canActivate: [AuthActivateRouteGuard], data: { expectedRole: "ADMIN"} },
   { path: "about", component: AboutComponent },
-  { path: "projects", component: ProjectComponent, canActivate: [AuthActivateRouteGuard] }
+  { path: "projects", component: ProjectComponent, canActivate: [AuthActivateRouteGuard], data: { expectedRole: "ADMIN"} }
 ];
 
 @NgModule({

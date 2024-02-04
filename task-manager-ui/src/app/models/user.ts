@@ -6,7 +6,7 @@ export class User {
     firstName: string;
     lastName: string;
     email: string;
-    roles: string[] = [];
+    roles: string[];
     createdDate: Date;
     updateDate: Date;
 }
