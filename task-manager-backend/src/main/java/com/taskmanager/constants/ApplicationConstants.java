@@ -22,4 +22,10 @@ public class ApplicationConstants {
 
     public static final String CSRF_REQUEST_ATTRIBUTE_NAME = "_csrf";
 
+    public static final String USER_API_URL = "/api/user";
+
+    public static final String PROJECTS_API_URL = "/api/projects";
+
+    public static final String PROJECTS_API_SEARCH_URL = PROJECTS_API_URL + "/search/**";
+
 }

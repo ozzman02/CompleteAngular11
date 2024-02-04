@@ -40,15 +40,14 @@ public class BootstrapData implements CommandLineRunner {
     private void loadUsersData() {
         if (userRepository.count() == 0) {
             Role adminRole = roleRepository.findByName("ADMIN");
-            Role userRole = roleRepository.findByName("USER");
+            Role employeeRole = roleRepository.findByName("EMPLOYEE");
             User admin = User.builder()
                     .username("osantamaria")
                     .firstName("Oscar")
                     .lastName("Santamaria")
                     .email("osantamaria@gmail.com")
-                    //.password("adminTest")
                     .password(passwordEncoder.encode("adminTest"))
-                    .roles(Arrays.asList(adminRole, userRole))
+                    .roles(Collections.singletonList(adminRole))
                     .createdDate(LocalDateTime.now())
                     .updateDate(LocalDateTime.now())
                     .build();
@@ -57,9 +56,8 @@ public class BootstrapData implements CommandLineRunner {
                     .firstName("Douglas")
                     .lastName("Avendano")
                     .email("davendano@gmail.com")
-                    //.password("userTest")
-                    .password(passwordEncoder.encode("userTest"))
-                    .roles(Collections.singletonList(userRole))
+                    .password(passwordEncoder.encode("employeeTest"))
+                    .roles(Collections.singletonList(employeeRole))
                     .createdDate(LocalDateTime.now())
                     .updateDate(LocalDateTime.now())
                     .build();
@@ -74,12 +72,12 @@ public class BootstrapData implements CommandLineRunner {
                     .createdDate(LocalDateTime.now())
                     .updateDate(LocalDateTime.now())
                     .build();
-            Role userRole = Role.builder()
-                    .name("USER")
+            Role employeeRole = Role.builder()
+                    .name("EMPLOYEE")
                     .createdDate(LocalDateTime.now())
                     .updateDate(LocalDateTime.now())
                     .build();
-            roleRepository.saveAll(Arrays.asList(adminRole, userRole));
+            roleRepository.saveAll(Arrays.asList(adminRole, employeeRole));
         }
     }
 

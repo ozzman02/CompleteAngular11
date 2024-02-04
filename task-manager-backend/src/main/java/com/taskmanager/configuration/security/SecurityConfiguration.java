@@ -48,7 +48,7 @@ public class SecurityConfiguration {
                     corsConfiguration.setMaxAge(MAX_AGE);
                     return corsConfiguration;
                 })).csrf((csrf) -> csrf.csrfTokenRequestHandler(csrfTokenRequestAttributeHandler)
-                        .ignoringRequestMatchers("/api/projects")
+                        .ignoringRequestMatchers(PROJECTS_API_URL)
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
                 //.addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
@@ -57,16 +57,12 @@ public class SecurityConfiguration {
                 .addFilterAfter(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
                 .addFilterBefore(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests((requests) -> requests
-                        /*.requestMatchers(HttpMethod.POST, "/api/projects").hasAnyAuthority("USER", "ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/projects").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/projects").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/projects/search/**").hasAnyRole("USER", "ADMIN")*/
-                        .requestMatchers(HttpMethod.POST, "/api/projects").authenticated()
-                        .requestMatchers(HttpMethod.PUT, "/api/projects").authenticated()
-                        .requestMatchers(HttpMethod.DELETE, "/api/projects").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/api/projects/search/**").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/api/user").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/api/projects").authenticated())
+                        .requestMatchers(HttpMethod.POST, PROJECTS_API_URL).authenticated()
+                        .requestMatchers(HttpMethod.PUT, PROJECTS_API_URL).authenticated()
+                        .requestMatchers(HttpMethod.DELETE, PROJECTS_API_URL).authenticated()
+                        .requestMatchers(HttpMethod.GET, PROJECTS_API_SEARCH_URL).authenticated()
+                        .requestMatchers(HttpMethod.GET, USER_API_URL).authenticated()
+                        .requestMatchers(HttpMethod.GET, PROJECTS_API_URL).authenticated())
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
         return http.build();
