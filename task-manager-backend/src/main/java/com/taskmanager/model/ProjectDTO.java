@@ -25,6 +25,15 @@ public class ProjectDTO {
     @NotNull
     private Integer teamSize;
 
+    @NotNull
+    private Boolean active;
+
+    @NotNull
+    @NotBlank
+    private String status;
+
+    private UUID clientLocationId;
+
     private Integer version;
 
     private LocalDateTime createdDate;

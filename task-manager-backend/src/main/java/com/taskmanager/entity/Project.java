@@ -1,5 +1,7 @@
 package com.taskmanager.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.taskmanager.model.ProjectStatusEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -47,6 +49,17 @@ public class Project implements Serializable {
     @NotNull
     @Column
     private Integer teamSize;
+
+    @Column
+    private Boolean active;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private ProjectStatusEnum status;
+
+    @ManyToOne
+    @JsonManagedReference
+    private ClientLocation clientLocation;
 
     @CreationTimestamp
     @Column(updatable = false)

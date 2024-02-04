@@ -28,4 +28,6 @@ public class ApplicationConstants {
 
     public static final String PROJECTS_API_SEARCH_URL = PROJECTS_API_URL + "/search/**";
 
+    public static final String CLIENT_LOCATIONS_API_URL = "/api/clientlocations";
+
 }

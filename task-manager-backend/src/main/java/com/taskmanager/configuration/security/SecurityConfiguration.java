@@ -16,6 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
+import org.springframework.security.web.header.writers.XXssProtectionHeaderWriter;
 import org.springframework.web.cors.CorsConfiguration;
 
 import java.util.List;
@@ -48,8 +49,11 @@ public class SecurityConfiguration {
                     corsConfiguration.setMaxAge(MAX_AGE);
                     return corsConfiguration;
                 })).csrf((csrf) -> csrf.csrfTokenRequestHandler(csrfTokenRequestAttributeHandler)
-                        .ignoringRequestMatchers(PROJECTS_API_URL)
+                        .ignoringRequestMatchers(PROJECTS_API_URL, CLIENT_LOCATIONS_API_URL)
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
+                .headers(headers -> headers.xssProtection(xss ->
+                                xss.headerValue(XXssProtectionHeaderWriter.HeaderValue.ENABLED_MODE_BLOCK))
+                        .contentSecurityPolicy(csp -> csp.policyDirectives("script-src 'self'")))
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
                 //.addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
                 //.addFilterAfter(new AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter.class)
@@ -61,8 +65,9 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.PUT, PROJECTS_API_URL).authenticated()
                         .requestMatchers(HttpMethod.DELETE, PROJECTS_API_URL).authenticated()
                         .requestMatchers(HttpMethod.GET, PROJECTS_API_SEARCH_URL).authenticated()
-                        .requestMatchers(HttpMethod.GET, USER_API_URL).authenticated()
-                        .requestMatchers(HttpMethod.GET, PROJECTS_API_URL).authenticated())
+                        .requestMatchers(HttpMethod.GET, PROJECTS_API_URL).authenticated()
+                        .requestMatchers(HttpMethod.GET, CLIENT_LOCATIONS_API_URL).authenticated()
+                        .requestMatchers(HttpMethod.GET, USER_API_URL).authenticated())
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
         return http.build();
