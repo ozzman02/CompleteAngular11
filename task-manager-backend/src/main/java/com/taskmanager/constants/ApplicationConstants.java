@@ -8,6 +8,8 @@ public class ApplicationConstants {
 
     public static final String AUTHORITIES_CLAIM = "authorities";
 
+    public static final int SECONDS_TO_SLEEP = 1000;
+
     public static final String JWT_ISSUER = "Task Manager";
 
     public static final String JWT_SUBJECT = "JWT Token";

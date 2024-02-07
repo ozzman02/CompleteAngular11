@@ -40,7 +40,7 @@ public class ClientLocation implements Serializable {
     @Column
     private String name;
 
-    @OneToMany(mappedBy = "clientLocation", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "clientLocation")
     @Fetch(FetchMode.JOIN)
     @JsonBackReference
     private Set<Project> projects;

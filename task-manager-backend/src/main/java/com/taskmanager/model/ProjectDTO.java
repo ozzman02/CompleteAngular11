@@ -34,6 +34,8 @@ public class ProjectDTO {
 
     private UUID clientLocationId;
 
+    private ClientLocationDTO clientLocation;
+
     private Integer version;
 
     private LocalDateTime createdDate;

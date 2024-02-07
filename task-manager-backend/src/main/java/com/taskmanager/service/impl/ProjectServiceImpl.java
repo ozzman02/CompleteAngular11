@@ -1,7 +1,12 @@
 package com.taskmanager.service.impl;
 
+import com.taskmanager.entity.ClientLocation;
+import com.taskmanager.mapper.ClientLocationMapper;
 import com.taskmanager.mapper.ProjectMapper;
+import com.taskmanager.model.ClientLocationDTO;
 import com.taskmanager.model.ProjectDTO;
+import com.taskmanager.model.ProjectStatusEnum;
+import com.taskmanager.repository.ClientLocationRepository;
 import com.taskmanager.repository.ProjectRepository;
 import com.taskmanager.service.ProjectService;
 import lombok.RequiredArgsConstructor;
@@ -11,11 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
+
+import static com.taskmanager.constants.ApplicationConstants.SECONDS_TO_SLEEP;
 
 @Service
 @RequiredArgsConstructor
@@ -23,13 +27,18 @@ public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectRepository projectRepository;
 
+    private final ClientLocationRepository clientLocationRepository;
+
     private final ProjectMapper projectMapper;
+
+    private final ClientLocationMapper clientLocationMapper;
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     @Override
     @Transactional(readOnly = true)
     public List<ProjectDTO> findAll() {
+        delay();
         return projectRepository.findAll().stream()
                 .map(projectMapper::projectToProjectDto)
                 .sorted(Comparator.comparing(ProjectDTO::getCreatedDate))
@@ -39,16 +48,37 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     @Transactional
     public ProjectDTO saveOrUpdate(ProjectDTO projectDTO) {
+
+        Optional<ClientLocation> existingClientLocationOptional =
+                clientLocationRepository.findById(projectDTO.getClientLocationId());
+
+        existingClientLocationOptional.ifPresent(clientLocation -> {
+            projectDTO.setClientLocation(ClientLocationDTO.builder()
+                    .id(clientLocation.getId())
+                    .name(clientLocation.getName())
+                    .build());
+        });
+
         if (projectDTO.getId() == null) {
             projectDTO.setCreatedDate(LocalDateTime.now());
             projectDTO.setUpdateDate(LocalDateTime.now());
-            return projectMapper.projectToProjectDto(projectRepository.save(projectMapper.projectDtoToProject(projectDTO)));
+
+            return projectMapper.projectToProjectDto(projectRepository
+                    .save(projectMapper.projectDtoToProject(projectDTO)));
         } else {
             AtomicReference<ProjectDTO> projectDTOAtomicReference = new AtomicReference<>();
             projectRepository.findById(projectDTO.getId()).ifPresentOrElse(existingProject -> {
                 existingProject.setProjectName(projectDTO.getProjectName());
                 existingProject.setDateOfStart(projectDTO.getDateOfStart());
                 existingProject.setTeamSize(projectDTO.getTeamSize());
+                existingProject.setActive(projectDTO.getActive());
+                existingProject.setStatus(ProjectStatusEnum.valueOf(projectDTO.getStatus()));
+
+                if (!projectDTO.getClientLocationId().equals(existingProject.getClientLocation().getId())) {
+                    existingProject.setClientLocation(clientLocationMapper
+                            .clientLocationDtoToClientLocation(projectDTO.getClientLocation()));
+                }
+
                 existingProject.setUpdateDate(LocalDateTime.now());
                 existingProject.setVersion(projectDTO.getVersion() + 1);
                 projectDTOAtomicReference.set(projectMapper.projectToProjectDto(existingProject));
@@ -107,6 +137,14 @@ public class ProjectServiceImpl implements ProjectService {
                 .map(projectMapper::projectToProjectDto)
                 .sorted(Comparator.comparing(ProjectDTO::getCreatedDate))
                 .toList();
+    }
+
+    private void delay() {
+        try {
+            Thread.sleep(SECONDS_TO_SLEEP);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

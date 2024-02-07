@@ -5,7 +5,7 @@ import com.taskmanager.model.ProjectDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-public abstract class ProjectMapperDecorator implements ProjectMapper{
+public abstract class ProjectMapperDecorator implements ProjectMapper {
 
     private ProjectMapper projectMapper;
 
@@ -18,8 +18,6 @@ public abstract class ProjectMapperDecorator implements ProjectMapper{
     @Override
     public ProjectDTO projectToProjectDto(Project project) {
         ProjectDTO projectDTO = projectMapper.projectToProjectDto(project);
-        projectDTO.setActive(project.getActive());
-        projectDTO.setStatus(project.getStatus().name());
         projectDTO.setClientLocationId(project.getClientLocation().getId());
         return projectDTO;
     }
