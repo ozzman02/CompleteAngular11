@@ -6,5 +6,6 @@ export const AppConstants = {
     APP_ROOT_URL: ROOT_URL,
     USER_API_URL: ROOT_URL + "/user",
     PROJECTS_API_URL: ROOT_URL + "/projects",
+    CLIENT_LOCATIONS_API_URL: ROOT_URL + "/clientlocations",
     LOGOUT_REDIRECT_URI: ANGULAR_APP_URL + "/login"
 }

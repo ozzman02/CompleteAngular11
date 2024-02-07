@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from '../../models/project';
 import { ProjectsService } from '../../services/project/projects.service';
+import { ClientLocation } from '../../models/client-location';
+import { ClientLocationsService } from '../../services/client-locations/client-locations.service';
 
 @Component({
   selector: 'app-project',
@@ -10,7 +12,11 @@ import { ProjectsService } from '../../services/project/projects.service';
 })
 export class ProjectComponent implements OnInit {
 
-  projects: Project[];
+  projects: Project[] = [];
+
+  clientLocations: ClientLocation[] = [];
+
+  showLoading: boolean = true;
 
   newProject: Project = new Project();
 
@@ -26,15 +32,24 @@ export class ProjectComponent implements OnInit {
   
   searchText: string = '';
 
-  constructor(private projectService: ProjectsService) { }
+  constructor(private projectService: ProjectsService, private clientLocationService: ClientLocationsService) { }
 
   ngOnInit(): void {
     this.projectService.getAllProjects().subscribe(
       (response: any) => {
         this.projects = response.body;
+        this.showLoading = false;
       },
       (error) => {
         console.log(error)
+      }
+    );
+    this.clientLocationService.getAllClientLocations().subscribe(
+      (response: any) => {
+        this.clientLocations = response;
+      },
+      (error) => {
+        console.log(error);
       }
     );
   }
@@ -111,6 +126,10 @@ export class ProjectComponent implements OnInit {
     project.projectName = '';
     project.dateOfStart = null;
     project.teamSize = 0;
+    project.active = null;
+    project.status = null;
+    project.clientLocationId = '';
+    project.clientLocation = null;
     project.version = 0;
     project.createdDate = null;
     project.updateDate = null;
@@ -121,6 +140,10 @@ export class ProjectComponent implements OnInit {
     p.id = project.id;
     p.projectName = project.projectName;
     p.teamSize = project.teamSize;
+    p.clientLocationId = project.clientLocationId;
+    p.clientLocation = project.clientLocation;
+    p.active = project.active;
+    p.status = project.status;
     p.dateOfStart = project.dateOfStart;
     p.createdDate = project.createdDate;
     p.updateDate = project.updateDate;
