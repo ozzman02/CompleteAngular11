@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Project } from '../../models/project';
 import { ProjectsService } from '../../services/project/projects.service';
 import { ClientLocation } from '../../models/client-location';
 import { ClientLocationsService } from '../../services/client-locations/client-locations.service';
+import { NgForm } from '@angular/forms';
+import $ from "jquery";
 
 @Component({
   selector: 'app-project',
@@ -32,6 +34,10 @@ export class ProjectComponent implements OnInit {
   
   searchText: string = '';
 
+  @ViewChild("newForm") newForm: NgForm | any = null;
+
+  @ViewChild("editForm") editForm: NgForm | any = null;
+
   constructor(private projectService: ProjectsService, private clientLocationService: ClientLocationsService) { }
 
   ngOnInit(): void {
@@ -57,36 +63,49 @@ export class ProjectComponent implements OnInit {
   isSearchByAll() {
     return this.searchBy === 'all';
   }
+
+  onNewClick(event: any) {
+      this.newForm.resetForm();
+  }
   
   onSaveClick(): void {
-    this.projectService.insertProject(this.newProject).subscribe(
-      (response: any) => {
-        let p: Project = this.cloneProject(response.body);
-        this.projects.push(p);
-        this.clearProjectValues(this.newProject);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    if (this.newForm.valid) {
+      this.projectService.insertProject(this.newProject).subscribe(
+        (response: any) => {
+          let p: Project = this.cloneProject(response.body);
+          this.projects.push(p);
+          this.clearProjectValues(this.newProject);
+          $("#newFormCancel").trigger("click");
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
   }
 
   onEditClick(event: any, index: number): void {
-    this.editIndex = index;
-    this.editProject = this.cloneProject(this.projects[index]);
+    this.editForm.resetForm();
+    setTimeout(() => {
+      this.editIndex = index;
+      this.editProject = this.cloneProject(this.projects[index]);
+    }, 100);
   }
 
   onUpdateClick(): void {
-    this.projectService.updateProject(this.editProject).subscribe(
-      (response: any) => {
-        let p: Project = this.cloneProject(response.body);
-        this.projects[this.editIndex] = p;
-        this.clearProjectValues(this.editProject);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    if (this.editForm.valid) {
+      this.projectService.updateProject(this.editProject).subscribe(
+        (response: any) => {
+          let p: Project = this.cloneProject(response.body);
+          this.projects[this.editIndex] = p;
+          this.clearProjectValues(this.editProject);
+          $("#editFormCancel").trigger("click");
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
   }
 
   onDeleteClick(event: any, index: number): void {
