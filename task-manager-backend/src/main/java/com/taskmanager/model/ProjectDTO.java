@@ -25,13 +25,13 @@ public class ProjectDTO {
     @NotNull
     private Integer teamSize;
 
-    @NotNull
     private Boolean active;
 
     @NotNull
     @NotBlank
     private String status;
 
+    @NotNull
     private UUID clientLocationId;
 
     private ClientLocationDTO clientLocation;

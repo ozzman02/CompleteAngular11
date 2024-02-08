@@ -53,6 +53,7 @@ public class Project implements Serializable {
     @Column
     private Boolean active;
 
+    @NotNull
     @Column
     @Enumerated(EnumType.STRING)
     private ProjectStatusEnum status;
